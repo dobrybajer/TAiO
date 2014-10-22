@@ -11,7 +11,7 @@ function n = AutomataComputation(t_mtx, w_input)
     w_new=w_output;
     
     r=randi(col_len);
-    w_start(r)=1;
+    w_start(1)=1; % losowy stan pocz¹tkowy
 
     for i=1:word_len
         n=w_input(i);

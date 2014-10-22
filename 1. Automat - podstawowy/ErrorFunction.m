@@ -7,7 +7,7 @@ function [e_cnt, e_proc] = ErrorFunction(fname, t_mtx)
 %   OUT e_cnt  - liczba znalezionych b³êdów
 %   OUT e_proc - u³amek b³êdnych rozpoznañ
 
-    [s_list, c_cnt, mtx]=FileReader(fname, ';'); % dodaæ niezale¿noœæ od dlm
+    [~, ~, mtx]=FileReader(fname, ';'); % dodaæ niezale¿noœæ od dlm
     e_cnt=0;
     for i=1:size(mtx,1)
        s_output=AutomataComputation(t_mtx, mtx(i,2:size(mtx,2))');
