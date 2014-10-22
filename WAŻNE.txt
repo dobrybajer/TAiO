@@ -1,1 +1,31 @@
-Napiszmy tu nasze przemyślenia co do tego jak "programistycznie" miałby wyglądać nasz klasyfikator.
+﻿Całe zadanie ogólnie składa się z 4 etapów:
+
+1) Automat podstawowy + PSO
+Taki klasyfikator jest deterministyczny, rozpoznaje słowa o symbolach z alfabetu. Wartości cech finalnie są liczbami całkowitymi
+oznaczającymi numer przedziału [0,1]. Macierz przejścia dla każdego symbolu składa się z 1 przy czym nie więcej niż jedna 1 per kolumna.
+
+2) Automat niedeterministyczny + należy zmodyfikować PSO
+Ten etap polega na zmianie podejścia do funkcji przejścia dla każdego symbolu. Nadal wartościami tej funkcji są 1, ale teraz w każdej kolumni może być 
+od zera do trzech 1 (ograniczenie prof. Homendy). Zmienia się przez to interpretacja błędnego wyniku. Przykładowo jeśli po obliczeniu automatu otrzymamy wektor
+[0;1;1] tzn. że nasz symbol może być symbolem nr 2 lub nr 3 z alfabetu. Jeśli faktycznie jest to jeden z nich, to błąd się nie zwiększa. Jeśli żaden z nich, 
+to bład++.
+
+3) Automat rozmyty + należy zmodyfikować PSO
+Jest to również automat niedeterministyczny, ale tutaj niedeterminizm jest inny niż w etapie poprzednim. W funkcji przejścia mogą się pojawiać wartości
+ułamkowe z przedziału [0,1] i cała funkcja może być wypełniona takimi wartościami (w kolumnie może być więcej niż 3 wartości niezerowe). W takim wypadku 
+po obliczeniu automatu możemy mieć przykładowo wektor [0.3;0;0.4] co oznacza, że symbol pierwszy wykryliśmy z prawdopodobieństwem 0.3, a symbol 3 z prawd.
+0,5. Nie wiem (i być może nie jest to jeszcze ustalone) jak ma działać funkcja błędu.
+
+4) Automat odrzucający + należy zmodyfikować PSO
+Taki automat posiada dodatkowy stan np. "#", który służy odrzucaniu "śmieci" czyli symboli spoza języka. Przykładowo symbole jakie możemy wykryć to:
+a,b,c, 
+a na wejściu otrzymujemy wyraz:
+aabacada
+Dla litery "d" automat powinien przejść do stanu # (czyli odrzucić symbol) i wtedy błąd się nie zwiększa. Jeśli odrzucimy coś dobrego - błąd++, jeśli 
+zostawimy coś złego - błąd++.
+
+* Do zweryfikowania info w punktach 3) i 4). Nie wiem czy to mają być niezależne konstrukcje, czy przykładowo punkt 4) ma zawierać funkcjonalność 
+z punktu 3) i 2). To również należy zweryfikować.
+
+Póki co każdy etap ma osobny folder, z plikami które są kopią automatu podstawowego i tego się trzymajmy, najwyżej
+później będziemy łączyć funkcjonalności.
