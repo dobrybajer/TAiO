@@ -38,7 +38,7 @@ iteration = 1;
 q=1;
 while iteration < maxIterations
     for i = 1:pCount
-        V(:,:,:,i)=wspol.*V(:,:,:,i)+c1.*rand().*(pBest(:,:,:,i)-X(:,:,:,i))-c2.*rand().*(gBest-X(:,:,:,i));
+        V(:,:,:,i)=wspol.*V(:,:,:,i)+c1.*rand().*(pBest(:,:,:,i)-X(:,:,:,i))+c2.*rand().*(gBest-X(:,:,:,i));
         X(:,:,:,i)=X(:,:,:,i)+V(:,:,:,i);
 
         [~, pBestErrorPerc]=ErrorFunction2(mtx,X(:,:,:,i));

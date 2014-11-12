@@ -3,14 +3,14 @@ liczba_reprezentantow=15;
 liczba_cech=5;
 liczba_podzialow=4;
 l_bnd=0;
-u_bnd=1;
+u_bnd=5;
 
 max_iter=100;
-liczba_czastek=15;
-wspolczynnik_szybkosci_czastek=0.729;
-ogr_gorne_czastek=2;
-c1=1.49445;
-c2=1.49445;
+liczba_czastek=10;
+wspolczynnik_szybkosci_czastek=0.5;
+ogr_gorne_czastek=1;
+c1=sqrt(2);
+c2=sqrt(2);
 
 disp(' ');
 tic
@@ -20,6 +20,8 @@ zbior_uczacy=LearningSetGenerator(liczba_symboli,liczba_reprezentantow,liczba_ce
 macierz_przejscia=AutomataGenerator(liczba_symboli,liczba_podzialow);
 
 [ilosc_bledow,procent_bledow]=ErrorFunction('genLearningSet.dat',macierz_przejscia);
+
+
 
 disp(['Iloœæ b³êdów dla danego zbioru ucz¹cego/treningowego wynosi:'  num2str(ilosc_bledow)]); 
 disp(['U³amek b³êdnie rozpoznanych symboli dla danego zbioru ucz¹cego/treningowego wynosi:'  num2str(procent_bledow)]); 
