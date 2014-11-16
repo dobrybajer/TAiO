@@ -10,9 +10,8 @@ function n = AutomataComputation(t_mtx, w_input)
     w_start=w_output;
     w_new=w_output;
     
-    r=randi(col_len);
-    w_start(r)=1;
-
+    w_start(1)=1; % sta³y stan pocz¹tkowy
+    
     for i=1:word_len
         n=w_input(i);
         for k=1:col_len
@@ -23,5 +22,6 @@ function n = AutomataComputation(t_mtx, w_input)
         end
         w_start=w_output;
     end
+    
     n=find(w_start);
 end

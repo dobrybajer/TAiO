@@ -3,25 +3,25 @@ liczba_reprezentantow=15;
 liczba_cech=5;
 liczba_podzialow=4;
 l_bnd=0;
-u_bnd=5;
+u_bnd=1;
+mu=0;
+s=0.1;
 
 max_iter=100;
-liczba_czastek=10;
-wspolczynnik_szybkosci_czastek=0.5;
-ogr_gorne_czastek=1;
-c1=sqrt(2);
-c2=sqrt(2);
+liczba_czastek=15;
+wspolczynnik_szybkosci_czastek=0.729;
+ogr_gorne_czastek=2;
+c1=1.49445;
+c2=1.49445;
 
 disp(' ');
 tic
 
-zbior_uczacy=LearningSetGenerator(liczba_symboli,liczba_reprezentantow,liczba_cech,liczba_podzialow,l_bnd,u_bnd);
+zbior_uczacy=LearningSetGenerator(liczba_symboli,liczba_reprezentantow,liczba_cech,liczba_podzialow,l_bnd,u_bnd,mu,s);
 
 macierz_przejscia=AutomataGenerator(liczba_symboli,liczba_podzialow);
 
-[ilosc_bledow,procent_bledow]=ErrorFunction('genLearningSet.dat',macierz_przejscia);
-
-
+[ilosc_bledow,procent_bledow]=ErrorFunctionFile('genLearningSet.dat',macierz_przejscia);
 
 disp(['Iloœæ b³êdów dla danego zbioru ucz¹cego/treningowego wynosi:'  num2str(ilosc_bledow)]); 
 disp(['U³amek b³êdnie rozpoznanych symboli dla danego zbioru ucz¹cego/treningowego wynosi:'  num2str(procent_bledow)]); 
@@ -33,7 +33,7 @@ tic
 [macierz3d, blad] = PSO(liczba_symboli,liczba_podzialow,zbior_uczacy,max_iter,liczba_czastek,wspolczynnik_szybkosci_czastek,ogr_gorne_czastek,c1,c2);
 disp(['PSO/U³amek b³êdnie rozpoznanych symboli dla danego zbioru ucz¹cego/treningowego wynosi:'  num2str(blad)]); 
 disp(' ');
-[ilosc_bledow2,procent_bledow2]=ErrorFunction2(zbior_uczacy,macierz3d);
+[ilosc_bledow2,procent_bledow2]=ErrorFunction(zbior_uczacy,macierz3d);
 
 disp(['PO PSO/Iloœæ b³êdów dla danego zbioru ucz¹cego/treningowego wynosi:'  num2str(ilosc_bledow2)]); 
 disp(['PO PSO/U³amek b³êdnie rozpoznanych symboli dla danego zbioru ucz¹cego/treningowego wynosi:'  num2str(procent_bledow2)]);

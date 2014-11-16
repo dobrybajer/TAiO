@@ -1,4 +1,4 @@
-function [e_cnt, e_proc] = ErrorFunction2(mtx, t_mtx)
+function [e_cnt, e_proc] = ErrorFunction(mtx, t_mtx)
 %ERRORFUNCTION Funkcja b³êdu symuluj¹ca obliczenie automatu dla danego
 %zbioru wejœciowego (ucz¹cego) oraz danej macierzy przejœcia automatu.
 %Funkcja zwraca liczbê b³êdów oraz u³amek udanych rozpoznañ.

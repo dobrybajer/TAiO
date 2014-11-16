@@ -2,7 +2,6 @@ function [b_mtx, be_proc] = PSO(s_cnt, d_cnt, mtx, maxIterations, pCount, wspol,
 
 % Inicjalizacja œrodowiska:
 gBestValue = 2; % Globalne minimum pocz¹tkowe
-gOldBestValue=gBestValue;
 pBestValue=ones(pCount,1);
 l_bnd=0;
 
@@ -22,7 +21,7 @@ for i = 1:pCount
     X(:,:,:,i) = (u_bnd-l_bnd).*rand(s_cnt, s_cnt, d_cnt) + l_bnd;
     pBest(:,:,:,i)=X(:,:,:,i);
     V(:,:,:,i) = (vu_bnd-vl_bnd).*rand(s_cnt, s_cnt, d_cnt) + vl_bnd;
-    [~, pBestErrorPerc]=ErrorFunction2(mtx,X(:,:,:,i));
+    [~, pBestErrorPerc]=ErrorFunction(mtx,X(:,:,:,i));
     if(pBestErrorPerc<gBestValue)
        gBestValue=pBestErrorPerc;
        gBest=X(:,:,:,i);
@@ -33,15 +32,15 @@ end
 % G³ówna pêtla funkcji. Wykonuje siê nie wiêcej ni¿ 'maxIter' razy, ale
 % tak¿e mo¿e zostaæ zakoñczona wczeœniej, jeœli spe³nione jest kryterium
 % znalezienia wystarczaj¹co dobrego rozwi¹zania (tzn. ¿e kolejne zmiany s¹
-% niewiele polepszaj¹ce rozwi¹zanie)
+% niewiele polepszaj¹ce rozwi¹zanie) AKTUALNIE BRAK Z POWODÓW TECHNICZNYCH
+% - funkcje s¹ dyskretyzowane
 iteration = 1;
-q=1;
 while iteration < maxIterations
     for i = 1:pCount
         V(:,:,:,i)=wspol.*V(:,:,:,i)+c1.*rand().*(pBest(:,:,:,i)-X(:,:,:,i))-c2.*rand().*(gBest-X(:,:,:,i));
         X(:,:,:,i)=X(:,:,:,i)+V(:,:,:,i);
 
-        [~, pBestErrorPerc]=ErrorFunction2(mtx,X(:,:,:,i));
+        [~, pBestErrorPerc]=ErrorFunction(mtx,X(:,:,:,i));
         if(pBestErrorPerc<pBestValue(i,1))
            pBestValue(i,1)=pBestErrorPerc;
            pBest(:,:,:,i)=X(:,:,:,i);
@@ -51,11 +50,6 @@ while iteration < maxIterations
            end
         end
     end
-    if(gOldBestValue<=gBestValue && q==20)
-        %break;
-    end
-    q=q+1;
-    gOldBestValue=gBestValue;
     iteration=iteration+1;
 end
 

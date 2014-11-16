@@ -11,8 +11,9 @@ function n = AutomataComputation(t_mtx, w_input)
     w_new=w_output;
     
     r=randi(col_len);
-    w_start(r)=1;
-
+    w_start(1)=1; % losowy stan pocz¹tkowy
+    t_mtx=AutomataRecreator(t_mtx); % zmiana macierzy przejœcia na macierz zero-jedynkow¹
+    
     for i=1:word_len
         n=w_input(i);
         for k=1:col_len
@@ -23,5 +24,7 @@ function n = AutomataComputation(t_mtx, w_input)
         end
         w_start=w_output;
     end
-    n=find(w_start);
+    
+    %n=find(w_start);
+    [~,n]=max(w_start);
 end
