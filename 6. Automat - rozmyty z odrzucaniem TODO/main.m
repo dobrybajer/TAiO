@@ -1,5 +1,5 @@
 %__________PARAMETRY OGÓLNE___________%
-l_symboli=5;    % unikalne wartoœci z 1-szej kolumny
+l_symboli=10;   % unikalne wartoœci z 1-szej kolumny
 l_rep=20;       % liczba powtórzeñ powy¿szych
 l_cech=5;       % d³ugoœæ s³owa opisuj¹cego dany symbol
 l_podzialow=5;  % liczba stanów w automacie
@@ -8,7 +8,7 @@ u_bnd=10;       % górny zakres wartoœci zbioru ucz¹cego
 w_smax=0.25;    % wspó³czynnik maksymalnej iloœci elementów obcych
 war_oczek=0;    % wartoœæ oczekiwana dla rozk³adu normalnego (zaburzenie zbioru ucz¹cego)
 odch_std=1;     % odchylenie standardowe dla rozk³adu normalnego (zaburzenie zbioru ucz¹cego)
-log=0;          % 1 - info w logu, 0 - brak info w logu
+log=1;          % 1 - info w logu, 0 - brak info w logu
 %_____________________________________%
 
 

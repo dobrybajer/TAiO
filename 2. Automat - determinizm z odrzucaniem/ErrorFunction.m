@@ -13,7 +13,7 @@ function [e_cnt, e_proc] = ErrorFunction(mtx, t_mtx)
     for i=1:size(mtx,1)
        w_input=mtx(i,2:size(mtx,2))';
        s_output=AutomataComputation(t_mtx,w_input);
-       if s_output~=mtx(i,1) || (s_output==size(t_mtx,1) && sum(w_input>size(t_mtx,3))==0)
+       if s_output~=mtx(i,1) || (s_output==size(t_mtx,1) && mtx(i,1)>0)
            e_cnt=e_cnt+1;
        end
     end

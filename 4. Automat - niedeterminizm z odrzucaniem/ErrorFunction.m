@@ -18,8 +18,7 @@ function [e_cnt, e_proc, o_mtx] = ErrorFunction(mtx, t_mtx, flag)
     for i=1:size(mtx,1)
        w_input=mtx(i,2:size(mtx,2))';
        s_output=AutomataComputation(o_mtx,w_input);
-       if ((ismember(mtx(i,1),s_output)~=1 && ismember(size(t_mtx,1),s_output)~=1) ...
-           || (ismember(mtx(i,1),s_output)~=1 && ismember(size(t_mtx,1),s_output)==1 && sum(w_input>size(t_mtx,3))==0))
+       if ismember(mtx(i,1),s_output)~=1 || (ismember(mtx(i,1),s_output)~=1 && ismember(size(t_mtx,1),s_output)==1 && mtx(i,1)>0)
            e_cnt=e_cnt+1;
        end
     end

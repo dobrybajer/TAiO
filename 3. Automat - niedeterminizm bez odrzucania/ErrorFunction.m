@@ -7,8 +7,6 @@ function [e_cnt, e_proc, o_mtx] = ErrorFunction(mtx, t_mtx, flag)
 %   OUT e_cnt  - liczba znalezionych b³êdów
 %   OUT e_proc - u³amek b³êdnych rozpoznañ
     
-    %x_mtx=all(t_mtx==0 | t_mtx==1);
-    %if(sum(x_mtx(:))~=size(t_mtx,2)*size(t_mtx,3))
     o_mtx=t_mtx;
     if(flag==1)
         o_mtx=AutomataRecreator(t_mtx); % zmiana macierzy przejœcia na macierz zero-jedynkow¹ (niedeterministyczn¹)

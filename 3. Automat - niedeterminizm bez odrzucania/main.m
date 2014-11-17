@@ -25,7 +25,7 @@ startGeneration=tic;
 zbior_uczacy=LearningSetGenerator(l_symboli,l_rep,l_cech,l_podzialow,l_bnd,u_bnd,war_oczek,odch_std);
 macierz_przejscia=AutomataGenerator(l_symboli,l_podzialow);
 
-[ilosc_bledow,procent_bledow]=ErrorFunctionFile('genLearningSet.dat',macierz_przejscia);
+[ilosc_bledow,procent_bledow]=ErrorFunction(zbior_uczacy,macierz_przejscia,0);
 PrintInfo(0,[procent_bledow ilosc_bledow l_symboli*l_rep max_iter*l_czastek toc(startGeneration)]);
 
 startPso=tic;
