@@ -9,11 +9,12 @@ function n = AutomataComputation(t_mtx, w_input)
     w_output=zeros(col_len,1);
     w_start=w_output;
     w_new=w_output;
-   
-    w_start(1)=1; % sta³y stan pocz¹tkowy
     
+    w_start(1)=1; % sta³y stan pocz¹tkowy
     for i=1:word_len
         n=w_input(i);
+        d_cnt=size(t_mtx,3)-1;
+        n(n>d_cnt)=d_cnt;
         for k=1:col_len
             for l=1:col_len
                w_new(l)=min(t_mtx(k,l,n),w_start(l));
@@ -23,6 +24,5 @@ function n = AutomataComputation(t_mtx, w_input)
         w_start=w_output;
     end
     
-    %n=find(w_start);
-    [~,n]=max(w_start);
+    n=find(w_start);
 end
