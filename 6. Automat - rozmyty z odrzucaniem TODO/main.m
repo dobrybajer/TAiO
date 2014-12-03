@@ -13,7 +13,7 @@ log=1;          % 1 - info w logu, 0 - brak info w logu
 
 
 %__________PARAMETRY DLA PSO__________%
-max_iter=20;
+max_iter=100;
 l_czastek=10;
 v_czastek=0.729; % interia weight
 u_bnd_czastek=1; % ograniczenie górne search space cz¹stki

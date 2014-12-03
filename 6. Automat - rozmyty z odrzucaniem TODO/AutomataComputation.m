@@ -15,9 +15,15 @@ function n = AutomataComputation(t_mtx, w_input)
         n=w_input(i);
         for k=1:col_len
             for l=1:col_len
-               w_new(l)=min(t_mtx(k,l,n),w_start(l));
-            end
-            w_output(k)=max(w_new);
+               w_new(l)=1 -tanh(atanh(1-t_mtx(k,l,n)) + atanh(1-w_start(l)));
+            end       
+            z = length(w_new);
+            %In first element in w_new, there is a maximum of vector%
+            while z > 1
+                w_new(z-1) = tanh(atan(w_new(z-1)) + atanh(w_new(z)));
+                z = z-1;
+            end       
+            w_output(k)=w_new(1);           
         end
         w_start=w_output;
     end

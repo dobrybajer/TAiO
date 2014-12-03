@@ -9,12 +9,11 @@ function [e_cnt, e_proc] = ErrorFunction(mtx, t_mtx)
     
     e_cnt=0;
     for i=1:size(mtx,1)
-       s_output=AutomataComputation(t_mtx, mtx(i,2:size(mtx,2))');
-       if ismember(mtx(i,1),s_output)~=1 % tutaj do zmiany ca³y warunek
+        s_output=AutomataComputation(t_mtx, mtx(i,2:size(mtx,2))');
+        if s_output(mtx(i,1))~=1
            e_cnt=e_cnt+1;
-       end
+        end
     end
-
     e_proc=e_cnt/size(mtx,1);
 end
 

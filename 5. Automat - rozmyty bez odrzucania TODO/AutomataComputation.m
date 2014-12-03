@@ -25,13 +25,8 @@ function n = AutomataComputation(t_mtx, w_input)
                 z = z-1;
             end       
             w_output(k)=w_new(1);           
-%             for l=1:col_len
-%                 w_new(l)=min(t_mtx(k,l,n),w_start(l));
-%             end
-%             w_output(k)=max(w_new);
         end
         w_start=w_output;
     end
-    
     n=w_start; % zwracamy CA£Y wektor
 end
