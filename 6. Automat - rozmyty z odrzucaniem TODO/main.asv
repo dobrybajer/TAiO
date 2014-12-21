@@ -23,7 +23,7 @@ c2=1.49445;
 
 startGeneration=tic;
 
-zbior_uczacy=LearningFuzzyForeignElemSetGenerator('test.csv',l_symboli,l_rep,l_cech,war_oczek,odch_std);
+zbior_uczacy=LearningFuzzyForeignElemSetGenerator('test.csv',l_cech,l_podzialow,l_bnd,u_bnd,war_oczek,odch_std,w_smax);
 macierz_przejscia=AutomataGenerator(l_symboli,l_podzialow);
 
 [ilosc_bledow,procent_bledow]=ErrorFunction(zbior_uczacy,macierz_przejscia);

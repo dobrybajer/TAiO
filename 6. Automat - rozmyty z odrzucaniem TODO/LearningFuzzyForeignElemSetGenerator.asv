@@ -24,7 +24,7 @@ function final_set = LearningFuzzyForeignElemSetGenerator(datafilename, s_cnt, c
     f_cnt = (30 * s_cnt * c_cnt) / 100;
     f_cnt
     %wektor symboli obcych
-    f_arr = randperm(size(l_set,1), f_cnt);
+    f_arr = randperms(size(l_set,1), f_cnt);
     f_arr
     %macierz cech symboli obcych 
     f_mtx = ones(f_cnt, a_cnt);
