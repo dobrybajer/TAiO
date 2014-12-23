@@ -1,21 +1,22 @@
-function n = AutomataComputation(t_mtx, w_input)
+function n = AutomataComputation(t_mtx, w_input, a_cnt)
 %AUTOMATACOMPUTATION Symulacja obliczenia automatu, poprzez mno¿enie macierzy (zamiast mno¿enia -> min, zamiast sumowania -> max) 
 % IN t_mtx   - macierz przejœcia danego automatu
 % IN w_input - s³owo wejœciowe reprezentowane przez symbole z podzia³u cech
+% IN a_cnt - liczba cech danego symbolu
+% IN mtx - wagi dla cech wg. tego co mówi³ Alek
 % OUT n       - numer wykrytego symbolu
     col_len=size(t_mtx,1);
-    word_len=length(w_input);
     
     w_output=zeros(col_len,1);
     w_start=w_output;
     w_new=w_output;
     
     w_start(1)=1; % sta³y stan pocz¹tkowy
-    for i=1:word_len
-        n=w_input(i);
+    for i=1:a_cnt
+        n=w_input(i); % w_input to sp³aszczony wektor z ca³ej macierzy cech dla danego reprezentanta
         for k=1:col_len
             for l=1:col_len
-               w_new(l)=1 -tanh(atanh(1-t_mtx(k,l,n)) + atanh(1-w_start(l)));
+               w_new(l)=1 -tanh(atanh(1-t_mtx(k,l,n) + atanh(1-w_start(l))));
             end       
             z = length(w_new);
             %In first element in w_new, there is a maximum of vector%
@@ -28,5 +29,6 @@ function n = AutomataComputation(t_mtx, w_input)
         w_start=w_output;
     end
     
+
     n=w_start; % zwracamy CA£Y wektor
 end

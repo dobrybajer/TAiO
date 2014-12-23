@@ -6,6 +6,6 @@ function M = AutomataGenerator(s_cnt, d_cnt)
 % IN d_cnt - liczba podzia³ów przedzia³u (0,1) na cyfry 1,2,...,n
 % OUT M     - wygenerowany automat (funkcja przejœcia; macierz 3D)
    
-    M = rand(s_cnt+1, s_cnt+1, d_cnt); % prawdopodobnie to wystarczy
+    M = rand(s_cnt+1, s_cnt+1, d_cnt);
 end
 
