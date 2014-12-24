@@ -13,7 +13,7 @@ function n = AutomataComputation(t_mtx, w_input, a_cnt)
     
     w_start(1)=1; % sta³y stan pocz¹tkowy
     for i=1:a_cnt
-        n=w_input(i); % w_input to sp³aszczony wektor z ca³ej macierzy cech dla danego reprezentanta
+        n=w_input(i);
         for k=1:col_len
             for l=1:col_len
                w_new(l)=1 -tanh(atanh(1-t_mtx(k,l,n) + atanh(1-w_start(l))));

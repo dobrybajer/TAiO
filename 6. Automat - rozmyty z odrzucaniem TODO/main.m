@@ -23,10 +23,11 @@ c2=1.49445;
 
 startGeneration=tic;
 
-zbior_uczacy=LearningFuzzyForeignElemSetGenerator('test.csv',l_symboli,l_rep,l_cech,l_podzialow,war_oczek,odch_std);
+[zbior_uczacy, zbior_dysk]=LearningFuzzyForeignElemSetGenerator('test.csv',l_symboli,l_rep,l_cech,l_podzialow,war_oczek,odch_std);
+
 macierz_przejscia=AutomataGenerator(l_symboli,l_podzialow);
 
-[ilosc_bledow,procent_bledow]=ErrorFunction(zbior_uczacy,macierz_przejscia, l_cech);
+[ilosc_bledow,procent_bledow]=ErrorFunction(zbior_uczacy,macierz_przejscia, zbior_dysk);
 PrintInfo(0,[procent_bledow ilosc_bledow size(zbior_uczacy,1) max_iter*l_czastek toc(startGeneration)]);
 
 startPso=tic;
@@ -34,5 +35,5 @@ startPso=tic;
 [macierz3d, blad] = PSO(l_symboli+1,l_podzialow,zbior_uczacy,max_iter,l_czastek,v_czastek,u_bnd_czastek,c1,c2,log);
 PrintInfo(1,blad);
 
-[ilosc_bledow2,procent_bledow2]=ErrorFunction(zbior_uczacy,macierz3d, l_cech);
+[ilosc_bledow2,procent_bledow2]=ErrorFunction(zbior_uczacy,macierz3d, zbior_dysk);
 PrintInfo(2,[procent_bledow2 ilosc_bledow2 l_symboli*l_rep toc(startPso)]);

@@ -1,4 +1,4 @@
-function final_set = LearningFuzzyForeignElemSetGenerator(datafilename, s_cnt, c_cnt, a_cnt, d_cnt, mu, s)
+function [final_set,l_set] = LearningFuzzyForeignElemSetGenerator(datafilename, s_cnt, c_cnt, a_cnt, d_cnt, mu, s)
 %LearningFuzzySetGenerator Tworzenie rozmytego zbioru ucz¹cego z elementami
 %obcymi
 %   IN datafile - plik wejœciowy
@@ -42,23 +42,25 @@ function final_set = LearningFuzzyForeignElemSetGenerator(datafilename, s_cnt, c
     max_arr = max(l_set);
     max_el = max(max_arr);
     l_set = l_set./max_el;
+    %l_set
     %-------------------------%
     
     
     %--podzial na przedzia³y--%
     l_set = abs(l_set);
     l_set = ceil(l_set.*d_cnt);
+    %l_set
     
     section = 1/a_cnt;
     final_set = ones(size(l_set,1), a_cnt, a_cnt);
-    final_set(:,:,1) = l_set;
+    %final_set(:,:,1) = l_set;
     
     f_gauss = @(x,x0)  exp(-((x-x0)*(x-x0)));
     %f_gauss
     for i = 1:size(l_set,1)
         for j = 1:a_cnt
+            arg1 = l_set(i,j);
             for k = 1:a_cnt
-                arg1 = l_set(i,j);
                 arg2 = (k-1) * section + section/2;
                 final_set(i,j,k) = f_gauss(arg1,arg2);
             end
@@ -78,7 +80,7 @@ function final_set = LearningFuzzyForeignElemSetGenerator(datafilename, s_cnt, c
     %symbols_mtx
     
     final_set = cat(2,symbols_mtx, final_set);
-    final_set
+    %final_set
     %zbiór ucz¹cy z symbolami i cechami
     %s_arr
     %l_set(:,1)
