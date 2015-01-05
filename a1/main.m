@@ -1,3 +1,7 @@
+if(~exist('isRunByTAIO','var') || ~isRunByTAIO)
+    error('This is not run by TAIO2014');
+end
+
 %__________PARAMETRY OGÓLNE___________%
 l_symboli=10;    % unikalne wartoœci z 1-szej kolumny
 l_rep=20;       % liczba powtórzeñ powy¿szych
