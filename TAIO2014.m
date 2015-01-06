@@ -70,11 +70,11 @@ if(strcmp(options.wejscieTyp,'czyt'))
     elseif(~isempty(options.procRozmTest) && ~isempty(options.sciezkaTest))
         error('Parameter procRozmTest is not empty (sciezkaTest exists)');
     end
-    %tutaj jeszcze bnd%
-    
 elseif(strcmp(options.wejscieTyp,'gen'))
     if(options.iloscKlas < 1 || options.iloscCech < 0 || options.iloscPowtorzenWKlasie < 0 )
         error('Sth wrong with parameters');
+    elseif(options.minLos>options.maxLos)
+        error('minLos > maxLos');
     end
 else
     error('wejscieTyp = ?');
