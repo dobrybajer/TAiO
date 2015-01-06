@@ -21,7 +21,10 @@ global dyskretyzacja;
 global PSOiter;
 global PSOs;
 global PSOk;
-global PSOp;
+global PSOp
+
+genForbiddenParams = {'sciezkaTrain';'sciezkaTest';'sciezkaObceTrain';'sciezkaObceTest'};
+czytForbiddenParams = {'iloscKlas';'iloscCech';'iloscPowtorzenWKlasie';'minLos';'maxLos';'zaburzenie';'procRozmTest';'procRozmObce'};
 
 options = struct('etap', '', 'wejscieTyp','','sciezkaTrain','','sciezkaTest','', ...
 'sciezkaOutputKlas','','sciezkaOutputErr','','iloscKlas', 0,'rownolegle',0, ...
@@ -37,7 +40,14 @@ if round(nArgs/2)~=nArgs/2
    error('Program needs propertyName/propertyValue pairs')
 end
 i =1;
-for pair = reshape(varargin,2,[]) %# pair is {propName;propValue}
+for pair = reshape(varargin,2,[])
+   %checking for forbidden parameters%
+   if(strcmp(options.wejscieTyp,'czyt') && ~isempty(find(ismember(czytForbiddenParams,pair{1}), 1)))
+       error(strcat('Invalid parameter ',pair{1},' for wejscieTyp=czyt'));
+   elseif(strcmp(options.wejscieTyp,'gen') && ~isempty(find(ismember(genForbiddenParams,pair{1}), 1)))
+       error(strcat('Invalid parameter ',pair{1},' for wejscieTyp=gen'));
+   end
+   
    if any(strcmp(pair{1},optionNames))
       options.(pair{1}) = pair{2};
       i=i+1;
@@ -46,20 +56,28 @@ for pair = reshape(varargin,2,[]) %# pair is {propName;propValue}
    end
 end
 
-if(isempty(options.etap))
-    error('Parameter etap not found')
+if(isempty(options.etap) || isempty(options.wejscieTyp) ||  isempty(options.dyskretyzacja))
+    error('Required parameters not found')
 end
-if(strcmp(options.wejscieTyp,'czyt') && isempty(options.sciezkaTrain))
-    error('Parameter sciezkaTrain not found (wejscieType = czyt)')
-end
+
 if(isempty(options.dyskretyzacja) || options.dyskretyzacja <= 1)
     error('Parameter dyskretyzacja not found');
 end
 
-if(~strcmp(options.wejscieTyp,'gen'))
-    options.wejscieTyp = 'gen';
-    disp('wejscieTyp parameter with wrong value - changing its value to gen');
+if(strcmp(options.wejscieTyp,'czyt'))
+    if(isempty(options.sciezkaTrain))
+        error('Parameter sciezkaTrain empty (wejscieType = czyt)');
+    elseif(~isempty(options.procRozmTest) && ~isempty(options.sciezkaTest))
+        error('Parameter procRozmTest is not empty (sciezkaTest exists)');
+    end
+elseif(strcmp(options.wejscieTyp,'gen'))
+    if(options.iloscKlas < 1 || options.iloscCech < 0 || options.iloscPowtorzenWKlasie < 0 )
+        error('Sth wrong with parameters');
+    end
+else
+    error('wejscieTyp = ?');
 end
+
 
 filename = strcat(options.etap,'/main.m');
 

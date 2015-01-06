@@ -3,26 +3,25 @@ if(~exist('isRunByTAIO','var') || ~isRunByTAIO)
 end
 
 %__________PARAMETRY OGÓLNE___________%
-l_symboli=10;    % unikalne wartoœci z 1-szej kolumny
-l_rep=20;       % liczba powtórzeñ powy¿szych
-l_cech=5;       % d³ugoœæ s³owa opisuj¹cego dany symbol
-l_podzialow=5;  % liczba stanów w automacie
-l_bnd=0;        % dolny zakres wartoœci zbioru ucz¹cego
-u_bnd=10;        % górny zakres wartoœci zbioru ucz¹cego
+l_symboli=iloscKlas;    % unikalne wartoœci z 1-szej kolumny
+l_rep=iloscPowtorzenWKlasie;       % liczba powtórzeñ powy¿szych
+l_cech=iloscCech;       % d³ugoœæ s³owa opisuj¹cego dany symbol
+l_podzialow=dyskretyzacja;  % liczba stanów w automacie
+
+l_bnd= minLos;      % dolny zakres wartoœci zbioru ucz¹cego
+u_bnd= maxLos;        % górny zakres wartoœci zbioru ucz¹cego
 war_oczek=0;    % wartoœæ oczekiwana dla rozk³adu normalnego (zaburzenie zbioru ucz¹cego)
 odch_std=1;   % odchylenie standardowe dla rozk³adu normalnego (zaburzenie zbioru ucz¹cego)
 log=1;          % 1 - info w logu, 0 - brak info w logu
 %_____________________________________%
 
-
 %__________PARAMETRY DLA PSO__________%
-max_iter=20;
-l_czastek=10;
+max_iter=PSOiter;
+l_czastek=PSOs;
 v_czastek=0.729; % interia weight
 u_bnd_czastek=1; % ograniczenie górne search space cz¹stki
 c1=1.49445;
 c2=1.49445;
-%_____________________________________%
 
 startGeneration=tic;
 
