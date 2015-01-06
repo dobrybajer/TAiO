@@ -25,7 +25,17 @@ c2=1.49445;
 
 startGeneration=tic;
 
-zbior_uczacy=LearningSetGenerator(l_symboli,l_rep,l_cech,l_podzialow,l_bnd,u_bnd,war_oczek,odch_std);
+if (strcmp(wejscieTyp,'gen'))
+    zbior_uczacy=LearningSetGenerator(l_symboli,l_rep,l_cech,l_podzialow,l_bnd,u_bnd,war_oczek,odch_std);
+else %reading from excel file% 
+    [zbior_uczacy l_symboli l_cech l_rep] = ReadingExcelFile(sciezkaTrain,l_podzialow);
+end    
+l_symboli
+l_cech
+l_rep
+l_podzialow
+zbior_uczacy
+
 macierz_przejscia=AutomataGenerator(l_symboli,l_podzialow);
 
 [ilosc_bledow,procent_bledow]=ErrorFunctionFile('genLearningSet.dat',macierz_przejscia);

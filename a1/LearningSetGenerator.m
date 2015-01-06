@@ -22,9 +22,7 @@ function l_set = LearningSetGenerator(s_cnt, c_cnt, a_cnt, d_cnt, l_bnd, u_bnd, 
     %n_set=randn(s_cnt*c_cnt, a_cnt); % zbiór wartoœci wylosowany rozk³adem gaussa (wartoœæ oczekiwana 0, odchylenie 1)
     n_set=normrnd(mu,s,s_cnt*c_cnt,a_cnt); % zbiór wartoœci wylosowany rozk³adem gaussa (wartoœæ oczekiwana i odchylenie parametryzowane)
     l_set=abs(l_set+n_set); % zbiór cech zaburzony szumem z rozk³adu gaussa (wartoœci macierzy n_set), wartoœci wiêksze b¹dŸ równe 0
-    l_set=l_set./(u_bnd-l_bnd); % zaburzony zbiór cech zosta³ znormalizowany do przedzialu [0,1]
-    l_set(l_set>=1)=1;
-    l_set=ceil(l_set.*d_cnt); % zamiana wartoœci na przedzia³y, w jakich siê dane wartoœci znajduj¹, w zaleznosci od liczby podzialów
+    l_set = ManageSet(l_set, d_cnt, l_bnd, u_bnd);
     l_set=cat(2,s_list,l_set); % dodanie kolumny symboli
     
     FileWriter('genLearningSet.dat',l_set,';');

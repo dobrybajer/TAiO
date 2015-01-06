@@ -55,21 +55,23 @@ for pair = reshape(varargin,2,[])
       error('%s is not a recognized parameter name',inpName)
    end
 end
-
+%checking required parameters
 if(isempty(options.etap) || isempty(options.wejscieTyp) ||  isempty(options.dyskretyzacja))
     error('Required parameters not found')
 end
-
+%checking parameters
 if(isempty(options.dyskretyzacja) || options.dyskretyzacja <= 1)
     error('Parameter dyskretyzacja not found');
 end
-
+%still checking parameters
 if(strcmp(options.wejscieTyp,'czyt'))
     if(isempty(options.sciezkaTrain))
         error('Parameter sciezkaTrain empty (wejscieType = czyt)');
     elseif(~isempty(options.procRozmTest) && ~isempty(options.sciezkaTest))
         error('Parameter procRozmTest is not empty (sciezkaTest exists)');
     end
+    %tutaj jeszcze bnd%
+    
 elseif(strcmp(options.wejscieTyp,'gen'))
     if(options.iloscKlas < 1 || options.iloscCech < 0 || options.iloscPowtorzenWKlasie < 0 )
         error('Sth wrong with parameters');
