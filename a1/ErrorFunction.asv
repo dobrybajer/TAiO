@@ -10,11 +10,11 @@ function [e_cnt, e_proc] = ErrorFunction(mtx, t_mtx, classToFile,errorToFile)
     flag = 0;
     if(nargin < 3)
         flag = 0;
-    elseif nargin == 4 &&  ~isempty(classToFile) && ~isempty(errorToFile)
+    elseif nargin == 4 &&  isempty(classToFile) && errorToFile ~= ''
         flag = 1;
-    elseif nargin == 4 &&  ~isempty(classToFile) && isempty(errorToFile)
+    elseif nargin == 4 &&  isempty(classToFile) == '' && isempty(errorToFile)
         flag = 2;
-    elseif nargin == 4 &&  isempty(classToFile) && ~isempty(errorToFile)
+    elseif nargin == 4 &&  isempty(classToFile) ~= '' && isempty(errorToFile)
         flag = 3;
     else
         
@@ -34,14 +34,14 @@ function [e_cnt, e_proc] = ErrorFunction(mtx, t_mtx, classToFile,errorToFile)
        end
     end
     e_proc=e_cnt/size(mtx,1);
-    c = a(a>0);
-    if  flag ==1 
-        xlswrite(classToFile ,c);
-        xlswrite(errorToFile ,e_proc);
-    elseif flag ==3
-        xlswrite(classToFile ,c);
-    elseif flag == 2
-        xlswrite(errorToFile ,e_proc);
+        
+    if  flag ==1 || flag ==3
+        c = a(a>0);
+        xlswrite(toFile ,c);
+    end
+    
+    if flag == 1 || flag == 2
+        xlswrite(toFile ,e_proc);
     end
 end
 

@@ -20,8 +20,9 @@ global procRozmTest;
 global dyskretyzacja;
 global PSOiter;
 global PSOs;
-global PSOk;
-global PSOp
+global PSOd;
+global PSOcp;
+global PSOcg;
 
 genForbiddenParams = {'sciezkaTrain';'sciezkaTest';'sciezkaObceTrain';'sciezkaObceTest'};
 czytForbiddenParams = {'iloscKlas';'iloscCech';'iloscPowtorzenWKlasie';'minLos';'maxLos';'zaburzenie';'procRozmTest';'procRozmObce'};
@@ -30,7 +31,7 @@ options = struct('etap', '', 'wejscieTyp','','sciezkaTrain','','sciezkaTest','',
 'sciezkaOutputKlas','','sciezkaOutputErr','','iloscKlas', 0,'rownolegle',0, ...
 'iloscCech', 0, 'iloscPowtorzenWKlasie', 0, 'minLos', 0, 'maxLos',0,'ograniczNietermin',0, ... 
 'procRozmObce','','zaburzenie', 0, 'procRozmTest', 0, 'dyskretyzacja', 0, 'PSOiter',0, ...
-'PSOs',0,'PSOk',0, 'PSOp',0); 
+'PSOs',0,'PSOd',0, 'PSOcp',0,'PSOcg',0); 
 
 %# read the acceptable names
 optionNames = fieldnames(options);
@@ -61,7 +62,7 @@ if(isempty(options.etap) || isempty(options.wejscieTyp) ||  isempty(options.dysk
 end
 %checking parameters
 if(isempty(options.dyskretyzacja) || options.dyskretyzacja <= 1)
-    error('Parameter dyskretyzacja not found');
+    error('Parameter dyskretyzacja not found or wrong');
 end
 %still checking parameters
 if(strcmp(options.wejscieTyp,'czyt'))
@@ -107,12 +108,13 @@ procRozmTest = options.procRozmTest;
 dyskretyzacja = options.dyskretyzacja;
 PSOiter = options.PSOiter;
 PSOs = options.PSOs;
-PSOk = options.PSOk;
-PSOp = options.PSOp;
-
+PSOd = options.PSOd;
+PSOcp = options.PSOcp;
+PSOcg = options.PSOcg;
 try
    run(filename);
 catch err
+   path(cd,path);
    rethrow(err); %reverting path%
 end
 
