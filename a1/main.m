@@ -45,6 +45,7 @@ startPso=tic;
 [macierz3d, blad] = PSO(l_symboli,l_podzialow,zbior_uczacy,max_iter,l_czastek,v_czastek,u_bnd_czastek,c1,c2,log);
 PrintInfo(1,blad);
 
+disp('');
 disp('Dla zbioru treningowego:');
 disp('');
 
