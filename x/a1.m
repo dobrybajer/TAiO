@@ -27,28 +27,30 @@ c2=PSOcg; %cg
 startGeneration=tic;
 
 if (strcmp(wejscieTyp,'gen'))
-    zbior_uczacy=LearningSetGenerator(l_symboli,l_rep,l_cech,l_podzialow,l_bnd,u_bnd,war_oczek,odch_std);
+    zbior_uczacy=LearningSetGenerator1(l_symboli,l_rep,l_cech,l_podzialow,l_bnd,u_bnd,war_oczek,odch_std);
     zbior_treningowy = TrainingSetGenerator(l_symboli,l_rep,l_cech,l_podzialow,l_bnd,u_bnd,war_oczek,odch_std);
 else %reading from excel file% 
     [zbior_treningowy, l_symboli, l_cech, l_rep] = ReadingExcelFile(sciezkaTrain,l_podzialow);
     %compute upper bounds and lower bounds%
     [compute_bounds] = zbior_treningowy(2:end,:);
-    zbior_uczacy=LearningSetGenerator(l_symboli,l_rep,l_cech,l_podzialow,0,ceil(max(max(compute_bounds))),war_oczek,odch_std);
+    zbior_uczacy=LearningSetGenerator1(l_symboli,l_rep,l_cech,l_podzialow,0,ceil(max(max(compute_bounds))),war_oczek,odch_std);
 end    
 
-macierz_przejscia=AutomataGenerator(l_symboli,l_podzialow);
+macierz_przejscia=AutomataGenerator(l_symboli,l_podzialow,1);
 
-[ilosc_bledow,procent_bledow]=ErrorFunction(zbior_uczacy,macierz_przejscia);
+[ilosc_bledow,procent_bledow]=ErrorFunction1(zbior_uczacy,macierz_przejscia,1);
 PrintInfo(0,[procent_bledow ilosc_bledow l_symboli*l_rep max_iter*l_czastek toc(startGeneration)]);
 
 startPso=tic;
 
-[macierz3d, blad] = PSO(l_symboli,l_podzialow,zbior_uczacy,max_iter,l_czastek,v_czastek,u_bnd_czastek,c1,c2,log);
+[macierz3d, blad] = PSO(l_symboli,l_podzialow,zbior_uczacy,max_iter,l_czastek,v_czastek,u_bnd_czastek,c1,c2,log,@ErrorFunction1,1);
 PrintInfo(1,blad);
 
 disp('');
 disp('Dla zbioru treningowego:');
 disp('');
 
-[ilosc_bledow2,procent_bledow2]=ErrorFunction(zbior_treningowy,macierz3d,sciezkaOutputKlas,sciezkaOutputErr);
+macierz3d=AutomataRecreator(macierz3d,1);
+
+[ilosc_bledow2,procent_bledow2]=ErrorFunction1(zbior_treningowy,1,macierz3d,sciezkaOutputKlas,sciezkaOutputErr);
 PrintInfo(2,[procent_bledow2 ilosc_bledow2 l_symboli*l_rep toc(startPso)]);

@@ -1,4 +1,4 @@
-function [b_mtx, be_proc] = PSO(s_cnt, d_cnt, mtx, maxIterations, pCount, wspol, u_bnd, c1, c2, log)
+function [b_mtx, be_proc] = PSO_NDET(s_cnt, d_cnt, mtx, maxIterations, pCount, wspol, u_bnd, c1, c2, log, fcHandle)
 
 %_____________Inicjalizacja œrodowiska:__________________
 gplot=zeros(1,maxIterations);   % Wektor b³êdów poszczególnych iteracji
@@ -22,10 +22,11 @@ for i = 1:pCount
     V(:,:,:,i) = ((u_bnd-l_bnd).*rand(s_cnt, s_cnt, d_cnt) + l_bnd)*vel_factor;
     pBest(:,:,:,i)=X(:,:,:,i);
     
-    [~, pBestErrorPerc]=ErrorFunction(mtx,X(:,:,:,i));
+    [~, pBestErrorPerc, o_mtx]=fcHandle(mtx,X(:,:,:,i),1);
     if(pBestErrorPerc<gBestValue)
        gBestValue=pBestErrorPerc;
        gBest=X(:,:,:,i);
+       gBestRecreated=o_mtx;
     end
     pBestValue(i,1)=pBestErrorPerc;
 end
@@ -51,13 +52,14 @@ for iteration=1:maxIterations
         Xn(Xn<l_bnd)=l_bnd;
         X(:,:,:,i)=Xn;
 
-        [~, pBestErrorPerc]=ErrorFunction(mtx,X(:,:,:,i));
+        [~, pBestErrorPerc,o_mtx]=fcHandle(mtx,X(:,:,:,i),1);
         if(pBestErrorPerc<pBestValue(i,1))
            pBestValue(i,1)=pBestErrorPerc;
            pBest(:,:,:,i)=X(:,:,:,i);
            if(pBestErrorPerc<gBestValue)
                gBestValue=pBestErrorPerc;
                gBest=X(:,:,:,i);
+               gBestRecreated=o_mtx;
            end
         end
     end
@@ -72,7 +74,7 @@ end
 plot(gplot);
 axis([1,maxIterations,0,1]);
 
-b_mtx=AutomataRecreator(gBest);
+b_mtx=gBestRecreated;
 be_proc=gBestValue;
 end
 

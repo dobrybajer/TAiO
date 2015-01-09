@@ -84,7 +84,7 @@ else
 end
 
 
-filename = strcat(options.etap,'/main.m');
+filename = strcat(options.etap,'.m');
 
 if ~exist(filename,'file')
     error('wrong stage name');

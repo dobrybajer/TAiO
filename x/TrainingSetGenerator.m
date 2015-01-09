@@ -21,7 +21,7 @@ function [ l_set ] = TrainingSetGenerator(s_cnt, c_cnt, a_cnt, d_cnt, l_bnd, u_b
     
     l_set=zeros(s_cnt*c_cnt, a_cnt);
     
-    x=l_bnd +(u_bnd-l_bnd).*rand(s_cnt,c_cnt);
+    x=l_bnd +(u_bnd-l_bnd).*rand(s_cnt,a_cnt);
     for i=1:s_cnt
         for j=1:c_cnt
             l_set((i-1)*c_cnt+j,:) = x(i,:);
