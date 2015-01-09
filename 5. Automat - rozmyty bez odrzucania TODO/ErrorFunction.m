@@ -8,11 +8,20 @@ function [e_cnt, e_proc] = ErrorFunction(mtx, t_mtx)
 %   OUT e_proc - u³amek b³êdnych rozpoznañ
     
     e_cnt=0;
+    
     for i=1:size(mtx,1)
-        s_output=AutomataComputation(t_mtx, mtx(i,2:size(mtx,2))');
-        if s_output(mtx(i,1))~=1
-           e_cnt=e_cnt+1;
-        end
+       w_input = mtx(i,2:end,:);
+       s_output=AutomataComputation(t_mtx, squeeze(w_input), size(mtx,2)-1);
+       
+       
+       index = mtx(i,1,1);
+
+       if s_output(index) == 1 || index == find(s_output == max(s_output), 1)
+           var = 0;
+       else
+           var = 1 - (s_output(index)/sum(s_output));
+       end
+       e_cnt= e_cnt + var;
     end
     e_proc=e_cnt/size(mtx,1);
 end

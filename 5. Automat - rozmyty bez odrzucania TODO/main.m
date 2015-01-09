@@ -1,8 +1,8 @@
 %__________PARAMETRY OGÓLNE___________%
 l_symboli=10;   % unikalne wartoœci z 1-szej kolumny
-l_rep=20;       % liczba powtórzeñ powy¿szych
-l_cech=10;       % d³ugoœæ s³owa opisuj¹cego dany symbol
-l_podzialow=5;  % liczba stanów w automacie
+l_rep=4;       % liczba powtórzeñ powy¿szych
+l_cech=5;       % d³ugoœæ s³owa opisuj¹cego dany symbol
+l_podzialow=4;  % liczba stanów w automacie
 l_bnd=0;        % dolny zakres wartoœci zbioru ucz¹cego
 u_bnd=10;       % górny zakres wartoœci zbioru ucz¹cego
 war_oczek=0;    % wartoœæ oczekiwana dla rozk³adu normalnego (zaburzenie zbioru ucz¹cego)
@@ -22,11 +22,11 @@ c2=1.49445;
 
 startGeneration=tic;
 
-zbior_uczacy=LearningSetGenerator(l_symboli,l_rep,l_cech,l_podzialow,l_bnd,u_bnd,war_oczek,odch_std);
+zbior_uczacy=LearningSetGenerator(l_symboli,l_rep,l_cech,l_podzialow,war_oczek,odch_std);
 macierz_przejscia=AutomataGenerator(l_symboli,l_podzialow);
 
 [ilosc_bledow,procent_bledow]=ErrorFunction(zbior_uczacy,macierz_przejscia);
-PrintInfo(0,[procent_bledow ilosc_bledow l_symboli*l_rep max_iter*l_czastek toc(startGeneration)]);
+PrintInfo(0,[procent_bledow ilosc_bledow size(zbior_uczacy,1) max_iter*l_czastek toc(startGeneration)]);
 
 startPso=tic;
 

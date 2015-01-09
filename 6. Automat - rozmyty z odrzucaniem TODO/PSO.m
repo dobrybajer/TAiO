@@ -22,7 +22,7 @@ for i = 1:pCount
     V(:,:,:,i) = ((u_bnd-l_bnd).*rand(s_cnt, s_cnt, d_cnt) + l_bnd)*vel_factor;
     pBest(:,:,:,i)=X(:,:,:,i);
     
-    [~, pBestErrorPerc]=ErrorFunction(mtx,X(:,:,:,i),d_cnt);
+    [~, pBestErrorPerc]=ErrorFunction(mtx,X(:,:,:,i));
     if(pBestErrorPerc<gBestValue)
        gBestValue=pBestErrorPerc;
        gBest=X(:,:,:,i);
@@ -51,7 +51,7 @@ for iteration=1:maxIterations
         Xn(Xn<l_bnd)=l_bnd;
         X(:,:,:,i)=Xn;
 
-        [~, pBestErrorPerc]=ErrorFunction(mtx,X(:,:,:,i), d_cnt);
+        [~, pBestErrorPerc]=ErrorFunction(mtx,X(:,:,:,i));
         if(pBestErrorPerc<pBestValue(i,1))
            pBestValue(i,1)=pBestErrorPerc;
            pBest(:,:,:,i)=X(:,:,:,i);
