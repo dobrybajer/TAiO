@@ -1,4 +1,4 @@
-function l_set = LearningSetGenerator(s_cnt, c_cnt, a_cnt, d_cnt, l_bnd, u_bnd, mu, s, w_smax)
+function l_set = LearningSetGenerator2(s_cnt, c_cnt, a_cnt, d_cnt, l_bnd, u_bnd, mu, s, w_smax)
 %LEARNINGSETGENERATOR Tworzenie (losowanie) zbioru ucz¹cego wraz z
 %elementami obczymi, których iloœæ jes miêdzy 1 a w_smax * iloœæ symboli *
 %iloœæ powtórzeñ symbolu (liczba elementów obcych nie wiêksza ni¿ 25% dla w_smax = 0.25)

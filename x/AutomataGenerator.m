@@ -19,7 +19,6 @@ function M = AutomataGenerator(s_cnt, d_cnt, flaga)
         M = zeros(s_cnt, s_cnt, d_cnt);
     else
         M = zeros(s_cnt+1, s_cnt+1, d_cnt);
-        return;
     end
 
     if flaga == 1

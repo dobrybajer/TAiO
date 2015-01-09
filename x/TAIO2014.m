@@ -114,7 +114,7 @@ PSOd = options.PSOd;
 PSOcp = options.PSOcp;
 PSOcg = options.PSOcg;
 try
-   run(filename);
+   run(options.etap);
 catch err
    path(cd,path);
    rethrow(err); %reverting path%
