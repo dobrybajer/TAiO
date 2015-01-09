@@ -1,4 +1,4 @@
-function [e_cnt, e_proc] = ErrorFunction(mtx, t_mtx)
+function [e_cnt, e_proc] = ErrorFunction(mtx, t_mtx, classToFile, errorToFile)
 %ERRORFUNCTION Funkcja b³êdu symuluj¹ca obliczenie automatu dla danego
 %zbioru wejœciowego (ucz¹cego) oraz danej macierzy przejœcia automatu.
 %Funkcja zwraca liczbê b³êdów oraz u³amek udanych rozpoznañ.
@@ -8,6 +8,14 @@ function [e_cnt, e_proc] = ErrorFunction(mtx, t_mtx)
 %   OUT e_cnt  - liczba znalezionych b³êdów
 %   OUT e_proc - u³amek b³êdnych rozpoznañ
     e_cnt=0;
+    flag = 0;
+    if nargin == 4 &&  ~isempty(classToFile) && ~isempty(errorToFile)
+        flag = 1;
+    elseif nargin == 4 &&  ~isempty(classToFile) && isempty(errorToFile)
+        flag = 2;
+    elseif nargin == 4 &&  isempty(classToFile) && ~isempty(errorToFile)
+        flag = 3;
+    end
     
     for i=1:size(mtx,1)
        w_input = mtx(i,2:end,:);

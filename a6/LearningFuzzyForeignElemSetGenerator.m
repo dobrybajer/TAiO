@@ -1,4 +1,4 @@
-function [final_set] = LearningFuzzyForeignElemSetGenerator(s_cnt, c_cnt, a_cnt, d_cnt, mu, s)
+function [final_set] = LearningFuzzyForeignElemSetGenerator(w_smax,s_cnt, c_cnt, a_cnt, d_cnt, mu, s)
 %LearningFuzzySetGenerator Tworzenie rozmytego zbioru ucz¹cego z elementami
 %obcymi
 %   IN datafile - plik wejœciowy
@@ -32,7 +32,7 @@ function [final_set] = LearningFuzzyForeignElemSetGenerator(s_cnt, c_cnt, a_cnt,
     %l_set
     %-------symbole obce------%
     %liczba symboli obcych
-    f_cnt = ceil((30 * s_cnt * c_cnt) / 100);         %DO SPARAMETRYZOWANIA!!!!!!
+    f_cnt = ceil((w_smax * s_cnt * c_cnt));      
 
     %wektor symboli obcych
     f_arr = randperm(size(l_set,1));
