@@ -29,11 +29,9 @@ startGeneration=tic;
 if (strcmp(wejscieTyp,'gen'))
     zbior_uczacy=LearningSetGenerator(l_symboli,l_rep,l_cech,l_podzialow,l_bnd,u_bnd,war_oczek,odch_std);
     zbior_treningowy = TrainingSetGenerator(l_symboli,l_rep,l_cech,l_podzialow,l_bnd,u_bnd,war_oczek,odch_std);
-else %reading from excel file% 
-    [zbior_treningowy, l_symboli, l_cech, l_rep] = ReadingExcelFile(sciezkaTrain,l_podzialow);
-    %compute upper bounds and lower bounds%
-    [compute_bounds] = zbior_treningowy(2:end,:);
-    zbior_uczacy=LearningSetGenerator(l_symboli,l_rep,l_cech,l_podzialow,0,ceil(max(max(compute_bounds))),war_oczek,odch_std);
+else %reading from excel file%
+    [zbior_treningowy, l_symboli, l_cech, l_rep] = ReadingExcelFile(sciezkaTest,l_podzialow);
+    [zbior_uczacy, l_symboli, l_cech, l_rep] = ReadingExcelFile(sciezkaTrain,l_podzialow);    
 end    
 
 macierz_przejscia=AutomataGenerator(l_symboli,l_podzialow);
