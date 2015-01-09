@@ -1,4 +1,4 @@
-function [b_mtx, be_proc] = PSO_NDET(s_cnt, d_cnt, mtx, maxIterations, pCount, wspol, u_bnd, c1, c2, log, fcHandle)
+function [b_mtx, be_proc] = PSO_NDET(s_cnt, d_cnt, mtx, maxIterations, pCount, wspol, u_bnd, c1, c2, log, fcHandle, flaga)
 
 %_____________Inicjalizacja œrodowiska:__________________
 gplot=zeros(1,maxIterations);   % Wektor b³êdów poszczególnych iteracji
@@ -22,7 +22,7 @@ for i = 1:pCount
     V(:,:,:,i) = ((u_bnd-l_bnd).*rand(s_cnt, s_cnt, d_cnt) + l_bnd)*vel_factor;
     pBest(:,:,:,i)=X(:,:,:,i);
     
-    [~, pBestErrorPerc, o_mtx]=fcHandle(mtx,X(:,:,:,i),1);
+    [~, pBestErrorPerc, o_mtx]=fcHandle(mtx,X(:,:,:,i),flaga);
     if(pBestErrorPerc<gBestValue)
        gBestValue=pBestErrorPerc;
        gBest=X(:,:,:,i);
@@ -52,7 +52,7 @@ for iteration=1:maxIterations
         Xn(Xn<l_bnd)=l_bnd;
         X(:,:,:,i)=Xn;
 
-        [~, pBestErrorPerc,o_mtx]=fcHandle(mtx,X(:,:,:,i),1);
+        [~, pBestErrorPerc,o_mtx]=fcHandle(mtx,X(:,:,:,i),flaga);
         if(pBestErrorPerc<pBestValue(i,1))
            pBestValue(i,1)=pBestErrorPerc;
            pBest(:,:,:,i)=X(:,:,:,i);

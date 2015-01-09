@@ -1,4 +1,4 @@
-function l_set = LearningSetGenerator(s_cnt, c_cnt, a_cnt, d_cnt, l_bnd, u_bnd, mu, s)
+function l_set = LearningSetGenerator3(s_cnt, c_cnt, a_cnt, d_cnt, l_bnd, u_bnd, mu, s)
 %LEARNINGSETGENERATOR Tworzenie (losowanie) zbioru ucz¹cego
 %   IN s_cnt  - liczba symboli
 %   IN c_cnt  - liczba reprezentantów klasy danego symbolu
