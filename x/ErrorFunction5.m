@@ -1,4 +1,4 @@
-function [e_cnt, e_proc] = ErrorFunction5(mtx, t_mtx)
+function [e_cnt, e_proc] = ErrorFunction5(mtx, t_mtx,flaga)
 %ERRORFUNCTION Funkcja b³êdu symuluj¹ca obliczenie automatu dla danego
 %zbioru wejœciowego (ucz¹cego) oraz danej macierzy przejœcia automatu.
 %Funkcja zwraca liczbê b³êdów oraz u³amek udanych rozpoznañ.
@@ -11,7 +11,7 @@ function [e_cnt, e_proc] = ErrorFunction5(mtx, t_mtx)
     
     for i=1:size(mtx,1)
        w_input = mtx(i,2:end,:);
-       s_output=AutomataComputation(t_mtx, squeeze(w_input), size(mtx,2)-1);
+       s_output=AutomataComputation(t_mtx, squeeze(w_input), size(mtx,2)-1,flaga);
        
        
        index = mtx(i,1,1);

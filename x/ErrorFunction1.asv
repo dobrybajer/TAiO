@@ -24,7 +24,7 @@ function [e_cnt, e_proc] = ErrorFunction1(mtx, t_mtx, flaga, classToFile, errorT
     for i=1:size(mtx,1)
        s_output=AutomataComputation(t_mtx, mtx(i,2:size(mtx,2))', size(mtx,2)-1, flaga);
        if s_output~=mtx(i,1)
-           e_cnt=e_cnt+1
+           e_cnt=e_cnt+1;
        else
            a(i)= mtx(i,1);
        end

@@ -22,7 +22,7 @@ for i = 1:pCount
     V(:,:,:,i) = ((u_bnd-l_bnd).*rand(s_cnt, s_cnt, d_cnt) + l_bnd)*vel_factor;
     pBest(:,:,:,i)=X(:,:,:,i);
     
-    [~, pBestErrorPerc]=fcHandle(mtx,X(:,:,:,i),flaga);
+    [~, pBestErrorPerc]=fcHandle(mtx,X(:,:,:,i),fla1ga);
     if(pBestErrorPerc<gBestValue)
        gBestValue=pBestErrorPerc;
        gBest=X(:,:,:,i);
@@ -51,7 +51,7 @@ for iteration=1:maxIterations
         Xn(Xn<l_bnd)=l_bnd;
         X(:,:,:,i)=Xn;
 
-        [~, pBestErrorPerc]=fcHandle(mtx,X(:,:,:,i));
+        [~, pBestErrorPerc]=fcHandle(mtx,X(:,:,:,i),flaga);
         if(pBestErrorPerc<pBestValue(i,1))
            pBestValue(i,1)=pBestErrorPerc;
            pBest(:,:,:,i)=X(:,:,:,i);
@@ -72,7 +72,7 @@ end
 plot(gplot);
 axis([1,maxIterations,0,1]);
 
-b_mtx=AutomataRecreator(gBest);
+b_mtx=gBest;
 be_proc=gBestValue;
 end
 
