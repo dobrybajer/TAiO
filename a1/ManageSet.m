@@ -1,4 +1,4 @@
-function [ l_set ] = ManageSet(l_set, d_cnt, l_bnd, u_bnd)
+function l_set = ManageSet(l_set, d_cnt, l_bnd, u_bnd)
 %ManageSet Funkcja dostosowywuje zbiór ucz¹cy do potrzeb etapu
 %   IN l_set  - zbior cech
 %   IN s_cnt  - liczba symboli

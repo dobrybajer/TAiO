@@ -18,6 +18,7 @@ function [ l_set ] = TrainingSetGenerator(s_cnt, c_cnt, a_cnt, d_cnt, l_bnd, u_b
             counter=counter+1;
         end
     end
+    
     l_set=zeros(s_cnt*c_cnt, a_cnt);
     
     x=l_bnd +(u_bnd-l_bnd).*rand(s_cnt,c_cnt);

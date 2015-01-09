@@ -1,4 +1,4 @@
-function [ excel_set, l_symboli_x, l_cech_x, l_rep_x] = ReadingExcelFile(path, d_cnt)
+function [excel_set, l_symboli_x, l_cech_x, l_rep_x] = ReadingExcelFile(path, d_cnt)
 %ReadingExcelFile Czyta i zarzadza zawartoscia pliku excel
 %   IN l_set  - zbior uczacy (bez pierwszej kolumny)
 %   IN s_cnt  - liczba symboli
@@ -8,18 +8,16 @@ function [ excel_set, l_symboli_x, l_cech_x, l_rep_x] = ReadingExcelFile(path, d
 %   IN mu     - wartoœæ oczekiwana rozk³adu normalnego
 %   IN s      - odchylenie standardowe dla rozk³adu normalnego
 %   OUT l_set - zmieniony zbiór ucz¹cy
-[excel_matrix,excel_string]=xlsread(path);
-l_symboli_x = length(unique(excel_matrix));
-l_cech_x = size(excel_string,2) -1;
-l_rep_x = length(excel_matrix)./l_symboli_x;
+    [excel_matrix, excel_string] = xlsread(path);
+    l_symboli_x = length(unique(excel_matrix));
+    l_cech_x = size(excel_string,2) -1;
+    l_rep_x = length(excel_matrix)./l_symboli_x;
 
-l_set = cellfun(@str2double, excel_string(:,2:end));
+    l_set = cellfun(@str2double, excel_string(:,2:end));
 
-[max_val, ~] = max(l_set(:));
+    [max_val, ~] = max(l_set(:));
 
-l_set = ManageSet(l_set,d_cnt, 0, max_val);
-excel_set=cat(2,excel_matrix,l_set); % dodanie kolumny symboli
-
-FileWriter('genLearningSet.dat',l_set,';');
+    l_set = ManageSet(l_set,d_cnt, 0, max_val);
+    excel_set = cat(2,excel_matrix,l_set); % dodanie kolumny symboli
 end
 

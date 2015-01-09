@@ -23,6 +23,5 @@ function n = AutomataComputation(t_mtx, w_input)
         w_start=w_output;
     end
     
-    %n=find(w_start);
     [~,n]=max(w_start);
 end

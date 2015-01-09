@@ -15,7 +15,7 @@ function PrintInfo(type, args)
             x = x - hours * 3600;
             mins = floor(x / 60);
             secs = x - mins * 60;
-            fprintf('Przewidywany czas obliczeñ: %02.0f:%02.0f:%02.0f (+/- %02.0f:%02.0f:%02.0f)\n', hours, mins, secs, hours*0.2, mins*0.2, secs*0.2);
+            %fprintf('Przewidywany czas obliczeñ: %02.0f:%02.0f:%02.0f (+/- %02.0f:%02.0f:%02.0f)\n', hours, mins, secs, hours*0.2, mins*0.2, secs*0.2);
         case 1
             fprintf('\nB³¹d wyznaczony przez PSO: %2.0f%%\n', args(1)*100);
         case 2
