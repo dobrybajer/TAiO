@@ -27,21 +27,16 @@ c2=PSOcg; %cg
 startGeneration=tic;
 
 if (strcmp(wejscieTyp,'gen'))
-    zbior_uczacy=LearningSetGenerator1(l_symboli,l_rep,l_cech,l_podzialow,l_bnd,u_bnd,war_oczek,odch_std);
-    zbior_treningowy = TrainingSetGenerator(l_symboli,l_rep,l_cech,l_podzialow,l_bnd,u_bnd,war_oczek,odch_std);
+    [zbior_uczacy,zbior_testowy]=SetGenerator(l_symboli,l_rep,l_cech,l_podzialow,l_bnd,u_bnd,war_oczek,odch_std);
 else %reading from excel file% 
-    %[zbior_treningowy, l_symboli, l_cech, l_rep] = ReadingExcelFile(sciezkaTrain,l_podzialow);
     [zbior_uczacy, l_symboli, l_cech, l_rep] = ReadingExcelFile(sciezkaTrain,l_podzialow);
-    [zbior_treningowy, ~, ~, ~] = ReadingExcelFile(sciezkaTest,l_podzialow);
-    %compute upper bounds and lower bounds%
-    [compute_bounds] = zbior_treningowy(2:end,:);
-    zbior_uczacy=LearningSetGenerator1(l_symboli,l_rep,l_cech,l_podzialow,0,ceil(max(max(compute_bounds))),war_oczek,odch_std);
+    [zbior_testowy, ~, ~, ~] = ReadingExcelFile(sciezkaTest,l_podzialow);
 end    
 
 macierz_przejscia=AutomataGenerator(l_symboli,l_podzialow);
 
 [ilosc_bledow,procent_bledow]=ErrorFunction(zbior_uczacy,macierz_przejscia);
-PrintInfo(0,[procent_bledow ilosc_bledow l_symboli*l_rep max_iter*l_czastek toc(startGeneration)]);
+PrintInfo(0,[procent_bledow ilosc_bledow size(zbior_uczacy,1) max_iter*l_czastek toc(startGeneration)]);
 
 startPso=tic;
 
@@ -49,10 +44,8 @@ startPso=tic;
 PrintInfo(1,blad);
 
 disp('');
-disp('Dla zbioru treningowego:');
+disp('Dla zbioru testowego:');
 disp('');
 
-macierz3d=AutomataRecreator(macierz3d);
-
-[ilosc_bledow2,procent_bledow2]=ErrorFunction(zbior_treningowy,macierz3d,sciezkaOutputKlas,sciezkaOutputErr);
-PrintInfo(2,[procent_bledow2 ilosc_bledow2 l_symboli*l_rep toc(startPso)]);
+[ilosc_bledow2,procent_bledow2]=ErrorFunction(zbior_testowy,macierz3d,sciezkaOutputKlas,sciezkaOutputErr);
+PrintInfo(2,[procent_bledow2 ilosc_bledow2 l_symboli*ceil((l_rep/3)) toc(startPso)]);

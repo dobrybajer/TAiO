@@ -27,12 +27,11 @@ c2=PSOcg; %cg
 startGeneration=tic;
 
 if (strcmp(wejscieTyp,'gen'))
-    zbior_uczacy=LearningSetGenerator4(l_symboli,l_rep,l_cech,l_podzialow,l_bnd,u_bnd,war_oczek,odch_std,zaburzenie);
-    zbior_treningowy = TrainingSetGenerator(l_symboli,l_rep,l_cech,l_podzialow,l_bnd,u_bnd,war_oczek,odch_std);
+    [zbior_uczacy,zbior_treningowy]=SetGenerator(l_symboli,l_rep,l_cech,l_podzialow,l_bnd,u_bnd,war_oczek,odch_std,procRozmZaburz);
 else 
     [zbior_treningowy, ~, ~, ~] = ReadingExcelFile(sciezkaTest,l_podzialow);
     [zbior_uczacy, l_symboli, l_cech, l_rep] = ReadingExcelFile(sciezkaTrain,l_podzialow);    
-end  
+end    
 
 macierz_przejscia=AutomataGenerator(l_symboli,l_podzialow);
 
@@ -49,4 +48,4 @@ disp('Dla zbioru treningowego:');
 disp('');
 
 [ilosc_bledow2,procent_bledow2]=ErrorFunction(zbior_treningowy,macierz3d,sciezkaOutputKlas,sciezkaOutputErr);
-PrintInfo(2,[procent_bledow2 ilosc_bledow2 l_symboli*l_rep toc(startPso)]);
+PrintInfo(2,[procent_bledow2 ilosc_bledow2 size(zbior_treningowy,1) toc(startPso)]);

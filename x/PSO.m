@@ -75,8 +75,11 @@ end
 plot(gplot);
 axis([1,maxIterations,0,1]);
 
+% Zwrócenie odpowiedniej macierzy dla ka¿dego z etapów
 if (strcmp(etap,'a3') || strcmp(etap,'a4'))
     b_mtx=gBestRecreated;
+elseif (strcmp(etap,'a1') || strcmp(etap,'a2'))
+    b_mtx=AutomataRecreator(gBest);
 else
     b_mtx=gBest;
 end

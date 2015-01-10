@@ -1,14 +1,9 @@
 function l_set = ManageSet(l_set, d_cnt, l_bnd, u_bnd)
 %ManageSet Funkcja dostosowywuje zbiór ucz¹cy do potrzeb etapu
 %   IN l_set  - zbior cech
-%   IN s_cnt  - liczba symboli
-%   IN c_cnt  - liczba reprezentantów klasy danego symbolu
-%   IN a_cnt  - liczba cech
 %   IN d_cnt  - liczba podzia³ów przedzia³u (0,1) na cyfry 1,2,...,n
 %   IN l_bnd  - dolne ograniczenie dla przedzia³u rozkladu jednostajnego
 %   IN u_bnd  - górne ograniczenie dla przedzia³u rozk³adu jednostajnego
-%   IN mu     - wartoœæ oczekiwana rozk³adu normalnego
-%   IN s      - odchylenie standardowe dla rozk³adu normalnego
 %   OUT l_set - zmieniony zbiór cech
     l_set=l_set./(u_bnd-l_bnd); % zbiór cech zosta³ znormalizowany do przedzialu [0,1]
     l_set(l_set>=1)=1;

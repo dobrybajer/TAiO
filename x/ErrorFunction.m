@@ -8,7 +8,7 @@ function [e_cnt, e_proc, o_mtx] = ErrorFunction(mtx, t_mtx, classToFile, errorTo
 %   OUT e_proc - u³amek b³êdnych rozpoznañ
     global etap;
     o_mtx=t_mtx;
-    
+
     flag = 0;
     if nargin == 4 &&  ~isempty(classToFile) && ~isempty(errorToFile)
         flag = 1;
@@ -20,7 +20,7 @@ function [e_cnt, e_proc, o_mtx] = ErrorFunction(mtx, t_mtx, classToFile, errorTo
     
     e_cnt=0;
     
-    a = zeros(size(mtx,1)); 
+    a = zeros(size(mtx,1),1);
     
     if strcmp(etap,'a1')
         if nargin == 3
@@ -68,7 +68,7 @@ function [e_cnt, e_proc, o_mtx] = ErrorFunction(mtx, t_mtx, classToFile, errorTo
         
         for i=1:size(mtx,1)
            s_output=AutomataComputation(o_mtx,mtx(i,2:end)');
-           if ismember(mtx(i,1),s_output)~=1 || (ismember(mtx(i,1),s_output)~=1 && ismember(size(t_mtx,1),s_output)==1 && mtx(i,1)>0)
+           if (ismember(mtx(i,1),s_output)~=1 && mtx(i,1)>0) || (ismember(mtx(i,1),s_output)~=1 && ismember(size(t_mtx,1),s_output)~=1 && mtx(i,1)>=size(t_mtx,1))
                e_cnt=e_cnt+1;
            else
                a(i)= mtx(i,1);
@@ -79,7 +79,7 @@ function [e_cnt, e_proc, o_mtx] = ErrorFunction(mtx, t_mtx, classToFile, errorTo
            s_output=AutomataComputation(t_mtx, squeeze(mtx(i,2:end,:)), size(mtx,2)-1);
 
            index = mtx(i,1,1);
-
+            
            if s_output(index) == 1 || index == find(s_output == max(s_output), 1)
                var = 0;
                a(i)= mtx(i,1);
@@ -111,14 +111,14 @@ function [e_cnt, e_proc, o_mtx] = ErrorFunction(mtx, t_mtx, classToFile, errorTo
     
     e_proc=e_cnt/size(mtx,1);
     
-    c = a(a>0);
-    
+    c = a(a~=0);
+
     if  flag == 1 
         xlswrite(classToFile,c);
         xlswrite(errorToFile,e_proc);
-    elseif flag == 3
-        xlswrite(classToFile,c);
     elseif flag == 2
+        xlswrite(classToFile,c);
+    elseif flag == 3
         xlswrite(errorToFile,e_proc);
     end
 end

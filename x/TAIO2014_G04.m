@@ -1,4 +1,4 @@
-function TAIO2014( varargin )
+function TAIO2014_G04( varargin )
 %TAIO2014 Summary of this function goes here
  
 global isRunByTAIO; 
@@ -15,7 +15,7 @@ global iloscPowtorzenWKlasie;
 global minLos;
 global maxLos;
 global ograniczNietermin;
-global procRozmObce;
+global procRozmZaburz;
 global zaburzenie;
 global procRozmTest;
 global dyskretyzacja;
@@ -26,14 +26,14 @@ global PSOcp;
 global PSOcg;
 
 genForbiddenParams = {'sciezkaTrain';'sciezkaTest';'sciezkaObceTrain';'sciezkaObceTest'};
-czytForbiddenParams = {'iloscKlas';'iloscCech';'iloscPowtorzenWKlasie';'minLos';'maxLos';'zaburzenie';'procRozmTest';'procRozmObce'};
+czytForbiddenParams = {'iloscKlas';'iloscCech';'iloscPowtorzenWKlasie';'minLos';'maxLos';'zaburzenie';'procRozmTest';'procRozmZaburz'};
 
 %struct of pairs, where pair is (name,default value) 
 %for PSO real default arguments are set
 options = struct('etap', '', 'wejscieTyp','','sciezkaTrain','','sciezkaTest','', ...
 'sciezkaOutputKlas','','sciezkaOutputErr','','iloscKlas', 0,'rownolegle',0, ...
 'iloscCech', 0, 'iloscPowtorzenWKlasie', 0, 'minLos', 0, 'maxLos',0,'ograniczNietermin',0, ... 
-'procRozmObce','','zaburzenie', 0, 'procRozmTest', 0, 'dyskretyzacja', 0, 'PSOiter',20, ...
+'procRozmZaburz','','zaburzenie', 0, 'procRozmTest', 0, 'dyskretyzacja', 0, 'PSOiter',20, ...
 'PSOs',10,'PSOd',0.729, 'PSOcp',1.49445,'PSOcg',1.49445); 
 
 %# read the acceptable names
@@ -84,13 +84,6 @@ else
     error('wejscieTyp = ?');
 end
 
-
-filename = strcat(options.etap,'');
-
-if ~exist(filename,'file')
-    error('wrong stage name');
-end
-
 %setting global variables
 isRunByTAIO  = true;
 etap = options.etap;
@@ -106,7 +99,7 @@ iloscPowtorzenWKlasie = options.iloscPowtorzenWKlasie;
 minLos = options.minLos;
 maxLos = options.maxLos;
 ograniczNietermin = options.ograniczNietermin;
-procRozmObce = options.procRozmObce;
+procRozmZaburz = options.procRozmZaburz;
 zaburzenie = options.zaburzenie;
 procRozmTest = options.procRozmTest;
 dyskretyzacja = options.dyskretyzacja;

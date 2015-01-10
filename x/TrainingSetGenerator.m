@@ -1,35 +1,33 @@
-function l_set = TrainingSetGenerator(s_cnt, c_cnt, a_cnt, d_cnt, l_bnd, u_bnd, mu, s)
-%LEARNINGSETGENERATOR Tworzenie (losowanie) zbioru ucz?cego oraz zapisanie go do pliku
+function t_set = TrainingSetGenerator(s_cnt, c_cnt, l_set, stranger_cnt)
+%LEARNINGSETGENERATOR Tworzenie zbioru treningowego na podstawie zbioru
+%ucz¹cego metod¹ prostej kroswalidacji (simple cross-validation)
 %   IN s_cnt  - liczba symboli
 %   IN c_cnt  - liczba reprezentantów klasy danego symbolu
-%   IN a_cnt  - liczba cech
-%   IN d_cnt  - liczba podzia?ów przedzia?u (0,1) na cyfry 1,2,...,n
-%   IN l_bnd  - dolne ograniczenie dla przedzia?u rozkladu jednostajnego
-%   IN u_bnd  - górne ograniczenie dla przedzia?u rozk?adu jednostajnego
-%   IN mu     - warto?? oczekiwana rozk?adu normalnego
-%   IN s      - odchylenie standardowe dla rozk?adu normalnego
-%   OUT l_set - wygenerowany zbiór ucz?cy
+%   IN l_set - wygenerowany zbiór ucz?cy
+%   OUT t_set - wygenerowany zbiór ucz?cy
+    global etap;
+    if strcmp(etap,'a1') || strcmp(etap,'a2') || strcmp(etap,'a3') || strcmp(etap,'a4')
+        t_set=[];
+        for i=1:s_cnt
+           x=randperm(c_cnt,ceil(c_cnt/3)); % 1/3 zbioru uczacego 
+           x=x+((i-1)*c_cnt);
+           y=l_set(x,:);
+           t_set=[t_set;y];
+        end
 
-    s_list=zeros(s_cnt*c_cnt,1);
-    counter=1;
-    for i=1:length(s_list)
-        s_list(i)=counter;
-        if mod(i,c_cnt)==0
-            counter=counter+1;
+        if stranger_cnt > 0
+           x=randperm(stranger_cnt,ceil(stranger_cnt/3)); % 1/3 zbioru uczacego 
+           x=x+(s_cnt*c_cnt);
+           y=l_set(x,:);
+           t_set=[t_set;y];
+        end
+    else
+        t_set = [];
+        for i=1:s_cnt
+           x=randperm(c_cnt,ceil(c_cnt/3)); % 1/3 zbioru uczacego 
+           x=x+((i-1)*c_cnt);
+           y=l_set(x,:, :);
+           t_set=cat(1,t_set, y);
         end
     end
-    
-    l_set=zeros(s_cnt*c_cnt, a_cnt);
-
-    x=l_bnd +(u_bnd-l_bnd).*rand(s_cnt,a_cnt);
-    
-    for i=1:s_cnt
-        for j=1:c_cnt
-            l_set((i-1)*c_cnt+j,:) = x(i,:);
-        end
-    end
-    n_set=normrnd(mu,s,s_cnt*c_cnt,a_cnt); % zbiór warto?ci wylosowany rozk?adem gaussa (warto?? oczekiwana i odchylenie parametryzowane)
-    l_set=abs(l_set+n_set); % zbiór cech zaburzony szumem z rozk?adu gaussa (warto?ci macierzy n_set), warto?ci wi?ksze b?d? równe 0
-    l_set = ManageSet(l_set, d_cnt, l_bnd, u_bnd);
-    l_set=cat(2,s_list,l_set); % dodanie kolumny symboli
 end
