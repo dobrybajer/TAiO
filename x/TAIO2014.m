@@ -2,6 +2,7 @@ function TAIO2014( varargin )
 %TAIO2014 Summary of this function goes here
  
 global isRunByTAIO; 
+global etap;
 global wejscieTyp;
 global sciezkaTrain;
 global sciezkaTest;
@@ -92,6 +93,7 @@ end
 
 %setting global variables
 isRunByTAIO  = true;
+etap = options.etap;
 wejscieTyp = options.wejscieTyp;
 sciezkaTrain = options.sciezkaTrain;
 sciezkaTest = options.sciezkaTest;
@@ -114,7 +116,7 @@ PSOd = options.PSOd;
 PSOcp = options.PSOcp;
 PSOcg = options.PSOcg;
 try
-   run(options.etap);
+   run(upper(etap));
 catch err
    path(cd,path);
    rethrow(err); %reverting path%

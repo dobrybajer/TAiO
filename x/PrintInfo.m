@@ -9,7 +9,7 @@ function PrintInfo(type, args)
     
     switch type
         case 0
-            fprintf('\nB³¹d na starcie: %2.0f%% (%d z %d)\nCzas dzia³ania: %02.0f:%02.0f:%05.2f\n', args(1)*100, args(2), args(3), hours, mins, secs);
+            fprintf('\nB³¹d na starcie: %2.0f%% (%d z %d)\nCzas dzia³ania: %02.0f:%02.0f:%05.2f\n', args(1)*100, floor(args(2)), args(3), hours, mins, secs);
             x=args(4)*args(5)*1.2;
             hours = floor(x / 3600);
             x = x - hours * 3600;
@@ -19,7 +19,7 @@ function PrintInfo(type, args)
         case 1
             fprintf('\nB³¹d wyznaczony przez PSO: %2.0f%%\n', args(1)*100);
         case 2
-            fprintf('\nB³¹d na nowym automacie wyznaczonym przez PSO: %2.0f%% (%d z %d)\nCzas dzia³ania: %02.0f:%02.0f:%05.2f\n', args(1)*100, args(2), args(3), hours, mins, secs);
+            fprintf('\nB³¹d na nowym automacie wyznaczonym przez PSO: %2.0f%% (%d z %d)\nCzas dzia³ania: %02.0f:%02.0f:%05.2f\n', args(1)*100, floor(args(2)), args(3), hours, mins, secs);
         case 3
             fprintf('\nW iteracji: %d, b³¹d wynosi %2.0f%%\nCzas dzia³ania: %02.0f:%02.0f:%05.2f\n', args(1), args(2)*100, hours, mins, secs);
         otherwise

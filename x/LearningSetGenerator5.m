@@ -1,4 +1,4 @@
-function [final_set] = LearningSetGenerator(s_cnt, c_cnt, a_cnt, d_cnt, mu, s)
+function [final_set] = LearningSetGenerator5(s_cnt, c_cnt, a_cnt, d_cnt, mu, s)
 %LearningFuzzySetGenerator Tworzenie rozmytego zbioru ucz¹cego z elementami
 %obcymi
 %   IN datafile - plik wejœciowy
@@ -22,9 +22,6 @@ function [final_set] = LearningSetGenerator(s_cnt, c_cnt, a_cnt, d_cnt, mu, s)
             symbol_tmp = symbol_tmp + 1;
         end
     end
-
-    %zbiór ucz¹cy
-    l_set = ones(s_cnt*c_cnt, a_cnt);
     
     %zbiór wartoœci wylosowany rozk³adem gaussa (wartoœæ oczekiwana i odchylenie parametryzowane)
     l_set = normrnd(mu, s, s_cnt*c_cnt, a_cnt); 

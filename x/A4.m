@@ -34,15 +34,19 @@ else
     [zbior_uczacy, l_symboli, l_cech, l_rep] = ReadingExcelFile(sciezkaTrain,l_podzialow);    
 end  
 
-macierz_przejscia=AutomataGenerator(l_symboli,l_podzialow,4);
+macierz_przejscia=AutomataGenerator(l_symboli,l_podzialow);
 
-[ilosc_bledow,procent_bledow]=ErrorFunction4(zbior_uczacy,macierz_przejscia,1);
+[ilosc_bledow,procent_bledow]=ErrorFunction(zbior_uczacy,macierz_przejscia);
 PrintInfo(0,[procent_bledow ilosc_bledow size(zbior_uczacy,1) max_iter*l_czastek toc(startGeneration)]);
 
 startPso=tic;
 
-[macierz3d, blad] = PSO_NDET(l_symboli+1,l_podzialow,zbior_uczacy,max_iter,l_czastek,v_czastek,u_bnd_czastek,c1,c2,log,@ErrorFunction4,4);
+[macierz3d, blad] = PSO(l_symboli+1,l_podzialow,zbior_uczacy,max_iter,l_czastek,v_czastek,u_bnd_czastek,c1,c2,log,@ErrorFunction);
 PrintInfo(1,blad);
 
-[ilosc_bledow2,procent_bledow2]=ErrorFunction4(zbior_treningowy,macierz3d,1,sciezkaOutputKlas,sciezkaOutputErr);
+disp('');
+disp('Dla zbioru treningowego:');
+disp('');
+
+[ilosc_bledow2,procent_bledow2]=ErrorFunction(zbior_treningowy,macierz3d,sciezkaOutputKlas,sciezkaOutputErr);
 PrintInfo(2,[procent_bledow2 ilosc_bledow2 l_symboli*l_rep toc(startPso)]);

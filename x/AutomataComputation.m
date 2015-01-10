@@ -1,10 +1,12 @@
-function n = AutomataComputation(t_mtx, w_input, a_cnt, flaga)
+function n = AutomataComputation(t_mtx, w_input, a_cnt)
 %AUTOMATACOMPUTATION Symulacja obliczenia automatu, poprzez mno¿enie macierzy (zamiast mno¿enia -> min, zamiast sumowania -> max) 
 % IN t_mtx   - macierz przejœcia danego automatu
 % IN w_input - s³owo wejœciowe reprezentowane przez symbole z podzia³u cech
 % IN a_cnt - liczba cech danego symbolu
 % IN flaga - parametr oznaczaj¹cy typ automatu
 % OUT n       - numer wykrytego symbolu
+    global etap;
+
     n=0;
 
     col_len=size(t_mtx,1);
@@ -15,7 +17,7 @@ function n = AutomataComputation(t_mtx, w_input, a_cnt, flaga)
     w_new=w_output;
    
     w_start(1)=1; % sta³y stan pocz¹tkowy
-    if (flaga == 1 | flaga == 3)
+    if (strcmp(etap,'a1') || strcmp(etap,'a3'))
         for i=1:word_len
             n=w_input(i);
             for k=1:col_len
@@ -27,7 +29,7 @@ function n = AutomataComputation(t_mtx, w_input, a_cnt, flaga)
             w_start=w_output;
         end
         [~,n]=max(w_start);
-    elseif (flaga == 2 | flaga == 4)
+    elseif (strcmp(etap,'a2') || strcmp(etap,'a4'))
         for i=1:word_len
             n=w_input(i);
             d_cnt=size(t_mtx,3)-1;
@@ -41,7 +43,7 @@ function n = AutomataComputation(t_mtx, w_input, a_cnt, flaga)
             w_start=w_output;
         end
         n=find(w_start);
-    elseif (flaga == 5 | flaga == 6)
+    elseif (strcmp(etap,'a5') || strcmp(etap,'a6'))
         for i=1:a_cnt
             var = zeros(col_len,1);
             for r=1:size(w_input,2)
