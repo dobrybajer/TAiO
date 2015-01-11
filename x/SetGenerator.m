@@ -157,8 +157,8 @@ function [l_set, t_set] = SetGenerator(s_cnt, c_cnt, a_cnt, d_cnt, l_bnd, u_bnd,
 		
 		 %zaburzenie rozkladem normalnym
 		norm_mtx = normrnd(mu, s, s_cnt*c_cnt + f_cnt, a_cnt);
-		size(l_set)
-		size(norm_mtx)
+		size(l_set);
+		size(norm_mtx);
 		l_set = l_set + norm_mtx;
 		
 		%-------normalizacja------%
@@ -195,7 +195,9 @@ function [l_set, t_set] = SetGenerator(s_cnt, c_cnt, a_cnt, d_cnt, l_bnd, u_bnd,
 		
 		for i=2:size(final_set,3)
 			final_set(:,1,i) = final_set(:,1,1);
-		end
+        end
+        
+        l_set=final_set;
     end
    
     t_set = TrainingSetGenerator(s_cnt, c_cnt, l_set, stranger_cnt);
