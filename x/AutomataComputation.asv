@@ -68,9 +68,10 @@ function n = AutomataComputation(t_mtx, w_input, a_cnt)
                 var(:,r) = w_output;  
             end
             
+            x=zeros(col_len,size(w_input,1));
             for r=1:size(w_input,1)
                 for k=1:col_len
-                    var(r,k)= 1 - tanh(atanh(1-var(k,r)) + atanh(1-w_input(r,i)));
+                    x(r,k)= 1 - tanh(atanh(1-var(k,r)) + atanh(1-w_input(r,i)));
                 end
             end
             
@@ -78,11 +79,11 @@ function n = AutomataComputation(t_mtx, w_input, a_cnt)
                 z = 1:size(w_input,1);
                 %In first element in w_new, there is a maximum of vector%
                 while z > 1
-                    var(z-1,k) = tanh(atanh(x(z-1,k)) + atanh(x(z,k)));
+                    x(z-1,k) = tanh(atanh(x(z-1,k)) + atanh(x(z,k)));
                     z = z-1;
                 end
             end
-            w_start=var(:,1);
+            w_start=x(:,1);
         end
         
         n=w_start; % zwracamy CA£Y wektor
