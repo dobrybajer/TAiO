@@ -26,7 +26,14 @@ function t_set = TrainingSetGenerator(s_cnt, c_cnt, l_set, stranger_cnt)
         for i=1:s_cnt
            x=randperm(c_cnt,ceil(c_cnt/3)); % 1/3 zbioru uczacego 
            x=x+((i-1)*c_cnt);
-           y=l_set(x,:, :);
+           y=l_set(x,:,:);
+           t_set=cat(1,t_set, y);
+        end
+		
+		if stranger_cnt > 0
+           x=randperm(stranger_cnt,ceil(stranger_cnt/3)); % 1/3 zbioru uczacego 
+           x=x+(s_cnt*c_cnt);
+           y=l_set(x,:,:);
            t_set=cat(1,t_set, y);
         end
     end

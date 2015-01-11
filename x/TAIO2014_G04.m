@@ -109,7 +109,7 @@ PSOd = options.PSOd;
 PSOcp = options.PSOcp;
 PSOcg = options.PSOcg;
 try
-   run(upper(etap));
+   run('main');
 catch err
    path(cd,path);
    rethrow(err); %reverting path%
