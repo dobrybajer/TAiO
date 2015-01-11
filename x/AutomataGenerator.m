@@ -43,7 +43,9 @@ function M = AutomataGenerator(s_cnt, d_cnt)
         for i=1:d_cnt
             for j=1:s_cnt
                 niedeterminizm=floor(ograniczNietermin/100*s_cnt);
-                places=randperm(s_cnt,randi([0 niedeterminizm],1));
+                %places=randperm(s_cnt,randi([0 niedeterminizm],1));
+                 places = randperm(s_cnt);
+                 places = places(1:randi([0 niedeterminizm],1));
                 M(places,j,i)=1; 
             end
         end
@@ -51,7 +53,9 @@ function M = AutomataGenerator(s_cnt, d_cnt)
         for i=1:d_cnt
             for j=1:s_cnt+1
                 niedeterminizm=floor(ograniczNietermin/100*(s_cnt+1));
-                places=randperm(s_cnt+1,randi([0 niedeterminizm],1));
+               % places=randperm(s_cnt+1,randi([0 niedeterminizm],1));
+                 places = randperm(s_cnt+1);
+                 places = places(1:randi([0 niedeterminizm],1));
                 M(places,j,i)=1; 
             end
         end

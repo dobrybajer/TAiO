@@ -41,7 +41,6 @@ for iteration=1:maxIterations
     if(log==1)
         startIteration=tic;
     end
-    
     for i = 1:pCount
         Vn=wspol.*V(:,:,:,i)+c1.*rand().*(pBest(:,:,:,i)-X(:,:,:,i))+c2.*rand().*(gBest-X(:,:,:,i));
         Vn(Vn>max_vel)=max_vel;

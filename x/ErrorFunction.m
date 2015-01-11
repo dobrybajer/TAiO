@@ -9,6 +9,16 @@ function [e_cnt, e_proc, o_mtx] = ErrorFunction(mtx, t_mtx, classToFile, errorTo
     global etap;
     o_mtx=t_mtx;
 
+    global real_class_label;
+    
+    
+    
+    if exist('real_class_label','var') && ~isempty(real_class_label)
+        vector_flag = 1;
+    else
+        vector_flag = 0;
+    end
+   
     flag = 0;
     if nargin == 4 &&  ~isempty(classToFile) && ~isempty(errorToFile)
         flag = 1;
@@ -31,6 +41,8 @@ function [e_cnt, e_proc, o_mtx] = ErrorFunction(mtx, t_mtx, classToFile, errorTo
            s_output=AutomataComputation(t_mtx, mtx(i,2:end)');
            if s_output~=mtx(i,1)
                e_cnt=e_cnt+1;
+           elseif vector_flag == 1
+               a(i)= real_class_label(mtx(i,1));
            else
                a(i)= mtx(i,1);
            end
@@ -44,6 +56,8 @@ function [e_cnt, e_proc, o_mtx] = ErrorFunction(mtx, t_mtx, classToFile, errorTo
            s_output=AutomataComputation(t_mtx,mtx(i,2:end)');
            if any(s_output~=mtx(i,1)) || (s_output==size(t_mtx,1) && mtx(i,1)>0)
                e_cnt=e_cnt+1;
+           elseif vector_flag == 1
+               a(i)= real_class_label(mtx(i,1));
            else
                a(i)= mtx(i,1);
            end
@@ -57,6 +71,8 @@ function [e_cnt, e_proc, o_mtx] = ErrorFunction(mtx, t_mtx, classToFile, errorTo
            s_output=AutomataComputation(o_mtx, mtx(i,2:end)');
            if ismember(mtx(i,1),s_output)~=1
                e_cnt=e_cnt+1;
+           elseif vector_flag == 1
+               a(i)= real_class_label(mtx(i,1));
            else
                a(i)= mtx(i,1);
            end
@@ -70,6 +86,8 @@ function [e_cnt, e_proc, o_mtx] = ErrorFunction(mtx, t_mtx, classToFile, errorTo
            s_output=AutomataComputation(o_mtx,mtx(i,2:end)');
            if (ismember(mtx(i,1),s_output)~=1 && mtx(i,1)>0) || (ismember(mtx(i,1),s_output)~=1 && ismember(size(t_mtx,1),s_output)~=1 && mtx(i,1)>=size(t_mtx,1))
                e_cnt=e_cnt+1;
+           elseif vector_flag == 1
+               a(i)= real_class_label(mtx(i,1));
            else
                a(i)= mtx(i,1);
            end
@@ -82,7 +100,13 @@ function [e_cnt, e_proc, o_mtx] = ErrorFunction(mtx, t_mtx, classToFile, errorTo
             
            if s_output(index) == 1 || index == find(s_output == max(s_output), 1)
                var = 0;
-               a(i)= mtx(i,1);
+               
+               if vector_flag == 1
+                    a(i)= real_class_label(mtx(i,1));
+               else
+                    a(i)= mtx(i,1);
+               end
+               
            else
                var = 1 - (s_output(index)/sum(s_output));
            end
@@ -100,7 +124,11 @@ function [e_cnt, e_proc, o_mtx] = ErrorFunction(mtx, t_mtx, classToFile, errorTo
 
            if s_output(index) == 1 || index == find(s_output == max(s_output), 1)
                var = 0;
-               a(i)= mtx(i,1);
+               if vector_flag == 1
+                    a(i)= real_class_label(mtx(i,1));
+               else
+                    a(i)= mtx(i,1);
+               end
            else
                var = 1 - (s_output(index)/sum(s_output));
            end
