@@ -71,10 +71,12 @@ for iteration=1:maxIterations
         PrintInfo(3,[iteration gBestValue toc(startIteration)]);
     end
 end
+h = figure;
 
 plot(gplot);
 axis([1,maxIterations,0,1]);
-
+title(['etap ' etap ' iloœæ klas ' num2str(s_cnt)]);
+print(h, '-dpsc', strcat('C:\Users\Kamil\Desktop\',num2str(etap),num2str(maxIterations)));
 % Zwrócenie odpowiedniej macierzy dla ka¿dego z etapów
 if (strcmp(etap,'a3') || strcmp(etap,'a4'))
     b_mtx=gBestRecreated;

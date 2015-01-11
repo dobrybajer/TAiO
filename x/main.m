@@ -12,7 +12,7 @@ l_bnd= minLos;      % dolny zakres wartoœci zbioru ucz¹cego
 u_bnd= maxLos;        % górny zakres wartoœci zbioru ucz¹cego
 war_oczek=0;    % wartoœæ oczekiwana dla rozk³adu normalnego (zaburzenie zbioru ucz¹cego)
 odch_std=1;   % odchylenie standardowe dla rozk³adu normalnego (zaburzenie zbioru ucz¹cego)
-log=1;          % 1 - info w logu, 0 - brak info w logu
+log=0;          % 1 - info w logu, 0 - brak info w logu
 %_____________________________________%
 
 %__________PARAMETRY DLA PSO__________%
