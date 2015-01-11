@@ -1,4 +1,38 @@
 function [b_mtx, be_proc] = PSO(s_cnt, d_cnt, mtx, maxIterations, pCount, wspol, u_bnd, c1, c2, log, fcHandle)
+%Funckja realizuj¹ca algorytm PSO
+%IN s_cnt liczba klas
+%IN d_cnt liczba podzia³ów
+%IN mtx macierz testowanego zbioru
+%IN pCount liczba cz¹stek roju
+%IN Wspol maksymalna prêdkoœæ cz¹stek
+%IN maxIterations maksymalna liczba iteracji
+%IN u_bnd ograniczenie górne przestrzeni przeszukiwania
+%IN c1	waga w³asna cz¹stki
+%IN c2	waga s¹siadów cz¹stki
+%IN log czy mamy wypisywaæ na konsolê
+%IN fcHandle funkcja b³êdu na podstawie, której optymalizujemy zbiór wyjœciowy
+%OUT be_mtx przetworzona macierz
+%OUT be_proc procent b³edów dla obliczonego automatu
+
+macierz testowanego zbioru
+maksymalna liczba iteracji
+liczba cz¹stek roju
+maksymalna prêdkoœæ cz¹stek
+ograniczenie górne przestrzeni przeszukiwania
+waga w³asna cz¹stki
+waga s¹siadów cz¹stki
+funkcja b³êdu na podstawie, której optymalizujemy zbiór wyjœciowy
+
+
+Mtx	macierz testowanego zbioru
+maxIterations	maksymalna liczba iteracji
+pCount	liczba cz¹stek roju
+Wspol	maksymalna prêdkoœæ cz¹stek
+u_bnd	ograniczenie górne przestrzeni przeszukiwania
+c1	waga w³asna cz¹stki
+c2	waga s¹siadów cz¹stki
+fcHandle	funkcja b³êdu na podstawie, której optymalizujemy zbiór wyjœciowy
+
 
 %_____________Inicjalizacja œrodowiska:__________________
 global etap;

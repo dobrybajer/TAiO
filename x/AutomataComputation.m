@@ -3,7 +3,6 @@ function n = AutomataComputation(t_mtx, w_input, a_cnt)
 % IN t_mtx   - macierz przejœcia danego automatu
 % IN w_input - s³owo wejœciowe reprezentowane przez symbole z podzia³u cech
 % IN a_cnt - liczba cech danego symbolu
-% IN flaga - parametr oznaczaj¹cy typ automatu
 % OUT n       - numer wykrytego symbolu
     global etap;
 

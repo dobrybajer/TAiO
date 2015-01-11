@@ -6,7 +6,8 @@ function l_set = ManageSet(l_set, d_cnt, l_bnd, u_bnd)
 %   IN u_bnd  - górne ograniczenie dla przedzia³u rozk³adu jednostajnego
 %   OUT l_set - zmieniony zbiór cech
     l_set=l_set./(u_bnd-l_bnd); % zbiór cech zosta³ znormalizowany do przedzialu [0,1]
-    l_set(l_set>=1)=1;
+    l_set(l_set>=1)=1; 
     l_set=ceil(l_set.*d_cnt); % zamiana wartoœci na przedzia³y, w jakich siê dane wartoœci znajduj¹, w zaleznosci od liczby podzialów
+    l_set(l_set==0) = 1;
 end
 

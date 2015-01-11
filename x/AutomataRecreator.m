@@ -2,6 +2,8 @@ function o_mtx = AutomataRecreator(t_mtx)
 %AUTOMATARECREATOR Funkcja konwertuj¹ca dowoln¹ macierz 3D na macierz
 %zero-jedynkow¹, gdzie 1 jest tam gdzie maksymalny element w ka¿dej
 %kolumnie, a pozosta³e wartoœci w ramach danej kolumny to 0
+%IN t_mtx macierz automatu
+%OUT o_mtx przekonwertowana macierz
     global etap;
     global ograniczNietermin;
     o_mtx=zeros(size(t_mtx));

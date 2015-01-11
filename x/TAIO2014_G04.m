@@ -1,5 +1,6 @@
 function TAIO2014_G04( varargin )
-%TAIO2014 Summary of this function goes here
+%TAIO2014 Wywo³anie programu
+%IN parametry wykonawcze
  
 global isRunByTAIO; 
 global etap;

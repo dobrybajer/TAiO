@@ -4,6 +4,7 @@ function t_set = TrainingSetGenerator(s_cnt, c_cnt, l_set, stranger_cnt)
 %   IN s_cnt  - liczba symboli
 %   IN c_cnt  - liczba reprezentantów klasy danego symbolu
 %   IN l_set - wygenerowany zbiór ucz?cy
+%   IN stranger_cnt - liczba elementów obcych
 %   OUT t_set - wygenerowany zbiór ucz?cy
     global etap;
     if strcmp(etap,'a1') || strcmp(etap,'a2') || strcmp(etap,'a3') || strcmp(etap,'a4')
