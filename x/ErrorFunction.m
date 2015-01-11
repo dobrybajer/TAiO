@@ -76,7 +76,7 @@ function [e_cnt, e_proc, o_mtx] = ErrorFunction(mtx, t_mtx, classToFile, errorTo
         end
     elseif strcmp(etap,'a5')
         for i=1:size(mtx,1)
-           s_output=AutomataComputation(t_mtx, squeeze(mtx(i,2:end,:)), size(mtx,2)-1);
+           s_output=AutomataComputation(t_mtx, squeeze(mtx(i,2:end,:))', size(mtx,2)-1);
 
            index = mtx(i,1,1);
             
@@ -113,10 +113,10 @@ function [e_cnt, e_proc, o_mtx] = ErrorFunction(mtx, t_mtx, classToFile, errorTo
     
     c = a(a~=0);
 
-    if  flag == 1 
+    if  flag == 1 && ~isempty(c)
         xlswrite(classToFile,c);
         xlswrite(errorToFile,e_proc);
-    elseif flag == 2
+    elseif flag == 2 && ~isempty(c)
         xlswrite(classToFile,c);
     elseif flag == 3
         xlswrite(errorToFile,e_proc);

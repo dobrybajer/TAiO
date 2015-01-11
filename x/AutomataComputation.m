@@ -45,53 +45,46 @@ function n = AutomataComputation(t_mtx, w_input, a_cnt)
         n=find(w_start);
     elseif (strcmp(etap,'a5') || strcmp(etap,'a6'))
         w_start=rand(col_len,1);
-        %w_start=zeros(col_len,1);
      
         for i=1:a_cnt
-            var = zeros(col_len,a_cnt);
+            var = zeros(col_len,size(w_input,1));
+           
             for r=1:size(w_input,1)
                 for k=1:col_len
-                    
                     for l=1:col_len 
                        w_new(l)=1 -tanh(atanh(1-t_mtx(k,l,r)) + atanh(1-w_start(l)));
                     end    
                    
-                    z = length(w_new);
+                    z = col_len;
                     %In first element in w_new, there is a maximum of vector%
                     while z > 1
                         w_new(z-1) = tanh(atanh(w_new(z-1)) + atanh(w_new(z)));
                         z = z-1;
                     end
                   
-              
-                    %disp(['i ' num2str(i) ' r ' num2str(r) ' k ' num2str(k)]);
                     w_output(k)=w_new(1);
                 end
-                for p=1:size(w_output,1) 
-                   x(p)=1 - tanh(atanh(1-w_output(p)) + atanh(1-w_input(i,r)));
-                end  
-              
-                var(:,r) = x';  
-            end
-          
-            for c1=1:col_len 
-                z = a_cnt;
-                c2=var(c1,:);
                 
+                var(:,r) = w_output;  
+            end
+            
+            for r=1:size(w_input,1)
+                for k=1:col_len
+                    var(r,k)= 1 - tanh(atanh(1-var(k,r)) + atanh(1-w_input(r,i)));
+                end
+            end
+            
+            for k=1:col_len
+                z = 1:size(w_input,1);
+                %In first element in w_new, there is a maximum of vector%
                 while z > 1
-                    c2(z-1) = tanh(atanh(var(c1,z-1)) + atanh(var(c1,z)));
+                    var(z-1,k) = tanh(atanh(x(z-1,k)) + atanh(x(z,k)));
                     z = z-1;
                 end
-              
-                c3(c1)=c2(1);
-              
             end
-      
-           error('xD');
-            w_start = c3
-            
+            w_start=var(:,1);
         end
-        n=w_start % zwracamy CA£Y wektor
-        error('xD');
+        
+        n=w_start; % zwracamy CA£Y wektor
     end
 end
