@@ -14,7 +14,7 @@ function [excel_set, l_symboli_x, l_cech_x, l_rep_x real_class_label] = ReadingE
     l_cech_x = size(excel_string,2) -1;
     l_rep_x = length(excel_matrix)./l_symboli_x;
     
-    real_class_label = excel_matrix;
+    real_class_label = unique(excel_matrix);
     vector = zeros(length(excel_matrix),1);
     
     for i=1:l_symboli_x

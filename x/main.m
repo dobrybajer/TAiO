@@ -41,9 +41,10 @@ elseif(strcmp(etap, 'a2') || strcmp(etap, 'a4') || strcmp(etap, 'a6'))
         real_class_label = [];
     else 
         [zbior_uczacy, l_symboli, l_cech, l_rep real_class_label] = ReadingExcelFile(sciezkaTrain,l_podzialow); 
-		[zbior_treningowy, ~, ~, ~] = ReadingExcelFile(sciezkaTest,l_podzialow);   
+		[zbior_treningowy, ~, ~, ~,~] = ReadingExcelFile(sciezkaTest,l_podzialow);   
 	end   
 end
+
 
 macierz_przejscia=AutomataGenerator(l_symboli,l_podzialow);
 

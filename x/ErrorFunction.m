@@ -11,8 +11,6 @@ function [e_cnt, e_proc, o_mtx] = ErrorFunction(mtx, t_mtx, classToFile, errorTo
 
     global real_class_label;
     
-    
-    
     if exist('real_class_label','var') && ~isempty(real_class_label)
         vector_flag = 1;
     else
@@ -29,9 +27,8 @@ function [e_cnt, e_proc, o_mtx] = ErrorFunction(mtx, t_mtx, classToFile, errorTo
     end
     
     e_cnt=0;
-    
-    a = zeros(size(mtx,1),1);
-    
+    %zakaladmy ze 0,14 nigdy nie bedzie ani klasa ani elementem obcym%
+    a = zeros(size(mtx,1),1)+0.14;  
     if strcmp(etap,'a1')
         if nargin == 3
             t_mtx=AutomataRecreator(t_mtx); % zmiana macierzy przejœcia na macierz zero-jedynkow¹ (tylko w PSO)   
@@ -135,10 +132,10 @@ function [e_cnt, e_proc, o_mtx] = ErrorFunction(mtx, t_mtx, classToFile, errorTo
            e_cnt= e_cnt + var;
         end
     end
-    
+   
     e_proc=e_cnt/size(mtx,1);
     
-    c = a(a~=0);
+    c = a(a~=0.14);
 
     if  flag == 1 && ~isempty(c)
         xlswrite(classToFile,c);
