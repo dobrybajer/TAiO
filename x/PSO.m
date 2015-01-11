@@ -71,12 +71,19 @@ for iteration=1:maxIterations
         PrintInfo(3,[iteration gBestValue toc(startIteration)]);
     end
 end
-h = figure;
 
+%----- Wykres zale¿noœci b³êdu obliczenia automatu od numeru iteracji-----%
+h = figure;
 plot(gplot);
 axis([1,maxIterations,0,1]);
-title(['etap ' etap ' iloœæ klas ' num2str(s_cnt)]);
-print(h, '-dpsc', strcat('C:\Users\Kamil\Desktop\',num2str(etap),num2str(maxIterations)));
+title(['Wykres optymalizacji algorytmu PSO dla etapu ' etap ' oraz ilosci klas ' num2str(s_cnt)]);
+xlabel('Liczba iteracji, w których algorytm PSO optymalizuje macierz przejœcia automatu');
+ylabel('Procent b³êdu wyra¿ony jako u³amek');
+legend('B³¹d obliczenia automatu');
+print(h, '-djpeg', strcat('../',num2str(etap),'_',num2str(maxIterations)));
+close(h);
+%-------------------------------------------------------------------------%
+
 % Zwrócenie odpowiedniej macierzy dla ka¿dego z etapów
 if (strcmp(etap,'a3') || strcmp(etap,'a4'))
     b_mtx=gBestRecreated;
