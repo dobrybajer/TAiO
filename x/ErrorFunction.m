@@ -138,9 +138,15 @@ function [e_cnt, e_proc, o_mtx] = ErrorFunction(mtx, t_mtx, classToFile, errorTo
     c = a(a~=0.14);
 
     if  flag == 1 && ~isempty(c)
+        if exist(classToFile, 'file')==2
+            delete(classToFile);
+        end
         xlswrite(classToFile,c);
         xlswrite(errorToFile,e_proc);
     elseif flag == 2 && ~isempty(c)
+        if exist(classToFile, 'file')==2
+            delete(classToFile);
+        end
         xlswrite(classToFile,c);
     elseif flag == 3
         xlswrite(errorToFile,e_proc);
