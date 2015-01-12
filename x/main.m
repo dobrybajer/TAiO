@@ -11,7 +11,7 @@ l_podzialow=dyskretyzacja;  % liczba stanów w automacie
 l_bnd= minLos;      % dolny zakres wartoœci zbioru ucz¹cego
 u_bnd= maxLos;        % górny zakres wartoœci zbioru ucz¹cego
 war_oczek=0;    % wartoœæ oczekiwana dla rozk³adu normalnego (zaburzenie zbioru ucz¹cego)
-odch_std=1;   % odchylenie standardowe dla rozk³adu normalnego (zaburzenie zbioru ucz¹cego)
+odch_std=zaburzenie;   % odchylenie standardowe dla rozk³adu normalnego (zaburzenie zbioru ucz¹cego)
 log=0;          % 1 - info w logu, 0 - brak info w logu
 %_____________________________________%
 
