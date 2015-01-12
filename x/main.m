@@ -23,24 +23,28 @@ u_bnd_czastek=PSOd; % ograniczenie górne search space cz¹stki
 c1=PSOcp; %cp
 c2=PSOcg; %cg
 %_____________________________________%
+global real_class_label;
 
 startGeneration=tic;
 
 if(strcmp(etap, 'a1') || strcmp(etap, 'a3') || strcmp(etap, 'a5'))
 	if (strcmp(wejscieTyp,'gen'))
 		[zbior_uczacy,zbior_treningowy]=SetGenerator(l_symboli,l_rep,l_cech,l_podzialow,l_bnd,u_bnd,war_oczek,odch_std);
-	else 
-		[zbior_treningowy, ~, ~, ~] = ReadingExcelFile(sciezkaTest,l_podzialow);
-		[zbior_uczacy, l_symboli, l_cech, l_rep] = ReadingExcelFile(sciezkaTrain,l_podzialow);  
+        real_class_label = [];
+    else
+		[zbior_uczacy, l_symboli, l_cech, l_rep real_class_label] = ReadingExcelFile(sciezkaTrain,l_podzialow); 
+        [zbior_treningowy, ~, ~ , ~] = ReadingExcelFile(sciezkaTest,l_podzialow);
 	end   
 elseif(strcmp(etap, 'a2') || strcmp(etap, 'a4') || strcmp(etap, 'a6'))
 	if (strcmp(wejscieTyp,'gen'))
 		[zbior_uczacy,zbior_treningowy]=SetGenerator(l_symboli,l_rep,l_cech,l_podzialow,l_bnd,u_bnd,war_oczek,odch_std,procRozmZaburz);
-	else 
-		[zbior_treningowy, ~, ~, ~] = ReadingExcelFile(sciezkaTest,l_podzialow);
-		[zbior_uczacy, l_symboli, l_cech, l_rep] = ReadingExcelFile(sciezkaTrain,l_podzialow);    
+        real_class_label = [];
+    else 
+        [zbior_uczacy, l_symboli, l_cech, l_rep real_class_label] = ReadingExcelFile(sciezkaTrain,l_podzialow); 
+		[zbior_treningowy, ~, ~, ~,~] = ReadingExcelFile(sciezkaTest,l_podzialow);   
 	end   
 end
+
 
 macierz_przejscia=AutomataGenerator(l_symboli,l_podzialow);
 

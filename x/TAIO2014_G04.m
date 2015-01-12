@@ -1,5 +1,6 @@
 function TAIO2014_G04( varargin )
-%TAIO2014 Summary of this function goes here
+%TAIO2014 Wywo³anie programu
+%IN parametry wykonawcze
  
 global isRunByTAIO; 
 global etap;
@@ -71,8 +72,6 @@ end
 if(strcmp(options.wejscieTyp,'czyt'))
     if(isempty(options.sciezkaTrain))
         error('Parameter sciezkaTrain empty (wejscieType = czyt)');
-    elseif(~isempty(options.procRozmTest) && ~isempty(options.sciezkaTest))
-        error('Parameter procRozmTest is not empty (sciezkaTest exists)');
     end
 elseif(strcmp(options.wejscieTyp,'gen'))
     if(options.iloscKlas < 1 || options.iloscCech < 0 || options.iloscPowtorzenWKlasie < 0 )

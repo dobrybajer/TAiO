@@ -8,6 +8,7 @@ function [l_set, t_set] = SetGenerator(s_cnt, c_cnt, a_cnt, d_cnt, l_bnd, u_bnd,
 %   IN u_bnd  - górne ograniczenie dla przedzia³u rozk³adu jednostajnego
 %   IN mu     - wartoœæ oczekiwana rozk³adu normalnego
 %   IN s      - odchylenie standardowe dla rozk³adu normalnego
+%   IN procRozmZaburz - rozmiar zbioru zaburzeñ œmieci 
 %   OUT l_set - wygenerowany zbiór ucz¹cy
     global etap;
     stranger_cnt=0;

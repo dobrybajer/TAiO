@@ -1,4 +1,7 @@
 function PrintInfo(type, args)
+% Funkcja pomocnicza do wyswietlania danych na konsoli matlaba
+% IN type typ wypisywania 
+% IN args argumenty do wypisania
     if(type==0 || type==2 || type==3)
         x=length(args);
         hours = floor(args(x) / 3600);
