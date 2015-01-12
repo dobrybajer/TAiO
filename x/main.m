@@ -12,7 +12,7 @@ l_bnd= minLos;      % dolny zakres wartoœci zbioru ucz¹cego
 u_bnd= maxLos;        % górny zakres wartoœci zbioru ucz¹cego
 war_oczek=0;    % wartoœæ oczekiwana dla rozk³adu normalnego (zaburzenie zbioru ucz¹cego)
 odch_std=1;   % odchylenie standardowe dla rozk³adu normalnego (zaburzenie zbioru ucz¹cego)
-log=1;          % 1 - info w logu, 0 - brak info w logu
+log=0;          % 1 - info w logu, 0 - brak info w logu
 %_____________________________________%
 
 %__________PARAMETRY DLA PSO__________%
@@ -31,7 +31,7 @@ if(strcmp(etap, 'a1') || strcmp(etap, 'a3') || strcmp(etap, 'a5'))
 		[zbior_uczacy,zbior_treningowy]=SetGenerator(l_symboli,l_rep,l_cech,l_podzialow,l_bnd,u_bnd,war_oczek,odch_std);
 	else 
 		[zbior_treningowy, ~, ~, ~] = ReadingExcelFile(sciezkaTest,l_podzialow);
-		[zbior_uczacy, l_symboli, l_cech, l_rep] = ReadingExcelFile(sciezkaTrain,l_podzialow);    
+		[zbior_uczacy, l_symboli, l_cech, l_rep] = ReadingExcelFile(sciezkaTrain,l_podzialow);  
 	end   
 elseif(strcmp(etap, 'a2') || strcmp(etap, 'a4') || strcmp(etap, 'a6'))
 	if (strcmp(wejscieTyp,'gen'))
@@ -42,14 +42,12 @@ elseif(strcmp(etap, 'a2') || strcmp(etap, 'a4') || strcmp(etap, 'a6'))
 	end   
 end
 
-
 macierz_przejscia=AutomataGenerator(l_symboli,l_podzialow);
 
 [ilosc_bledow,procent_bledow]=ErrorFunction(zbior_uczacy,macierz_przejscia);
 PrintInfo(0,[procent_bledow ilosc_bledow size(zbior_uczacy,1) max_iter*l_czastek toc(startGeneration)]);
 
 startPso=tic;
-
 
 if(strcmp(etap, 'a1') || strcmp(etap, 'a3') || strcmp(etap, 'a5'))
 	l_symboli_tmp = l_symboli;
@@ -64,5 +62,5 @@ disp('');
 disp('Dla zbioru treningowego:');
 disp('');
 
-[ilosc_bledow2,procent_bledow2]=ErrorFunction(zbior_uczacy, macierz3d,sciezkaOutputKlas,sciezkaOutputErr);
+[ilosc_bledow2,procent_bledow2]=ErrorFunction(zbior_treningowy, macierz3d,sciezkaOutputKlas,sciezkaOutputErr);
 PrintInfo(2,[procent_bledow2 ilosc_bledow2 size(zbior_treningowy,1) toc(startPso)]);

@@ -90,8 +90,7 @@ function [e_cnt, e_proc, o_mtx] = ErrorFunction(mtx, t_mtx, classToFile, errorTo
         end
     elseif strcmp(etap,'a6')
         for i=1:size(mtx,1)
-           w_input = mtx(i,2:end,:);
-           s_output=AutomataComputation(t_mtx, squeeze(w_input), size(mtx,2)-1);
+           s_output=AutomataComputation(t_mtx, squeeze(mtx(i,2:end,:))', size(mtx,2)-1);
 
            if mtx(i,1,1) > length(s_output)
                index = length(s_output);
